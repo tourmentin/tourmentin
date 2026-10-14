@@ -1,0 +1,31 @@
+{
+  "id": "timbres-fiscaux",
+  "libelle": "Timbres fiscaux électroniques",
+  "criticite": 2,
+  "actif": false,
+  "domaines": ["timbres.impots.gouv.fr"],
+  "domaine_principal": "timbres.impots.gouv.fr",
+  "domaines_verifies": [],
+  "termes_forts": [
+    "achat de timbre fiscal électronique",
+    "timbre fiscal pour passeport",
+    "timbre pour titre de séjour",
+    "justificatif d'achat de timbre"
+  ],
+  "termes_faibles": [
+    "timbre fiscal", "timbre électronique", "passeport", "carte nationale d'identité",
+    "titre de séjour", "permis bateau", "attestation d'accueil", "remboursement de timbre",
+    "montant du timbre", "durée de validité", "justificatif", "code 2D",
+    "achat en ligne", "point de vente agréé", "buraliste"
+  ],
+  "termes_saisie": ["adresse électronique", "numéro de carte bancaire", "numéro de timbre", "numéro de timbre à 16 chiffres"],
+  "format_identifiant": "aucun compte, achat direct",
+  "racines_typo": ["timbre", "timbres", "timbre-fiscal", "timbrefiscal"],
+  "couleurs": ["#000091", "#e1000f", "#ffffff"],
+  "franceconnect": false,
+  "espaces_multiples": [],
+  "a_verifier": true,
+  "avertissement": "Service sans compte utilisateur : l'axe Exposition ne peut pas s'appuyer sur un champ mot de passe. Le seul signal E exploitable est la présence d'un formulaire de paiement. C'est précisément le schéma des faux sites de timbres fiscaux payants.",
+  "signal_specifique": "presence_champ_carte_bancaire",
+  "notes_verification": "Domaine non confirmé. Vérifier s'il est toujours actif ou remplacé."
+}

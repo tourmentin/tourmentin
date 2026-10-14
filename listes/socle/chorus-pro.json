@@ -1,0 +1,62 @@
+{
+  "id": "chorus-pro",
+  "libelle": "Chorus Pro",
+  "criticite": 2,
+  "actif": false,
+  "domaines": [
+    "chorus-pro.gouv.fr",
+    "portail.chorus-pro.gouv.fr",
+    "communaute.chorus-pro.gouv.fr"
+  ],
+  "domaine_principal": "chorus-pro.gouv.fr",
+  "domaines_verifies": [],
+  "termes_forts": [
+    "portail Chorus Pro de facturation",
+    "déposer une facture",
+    "facturation électronique de l'État",
+    "mon compte utilisateur Chorus Pro",
+    "structure émettrice"
+  ],
+  "termes_faibles": [
+    "AIFE",
+    "agence pour l'informatique financière de l'État",
+    "facture électronique",
+    "commande publique",
+    "marché public",
+    "numéro d'engagement",
+    "code service",
+    "SIRET destinataire",
+    "mandat de facturation",
+    "flux de facturation",
+    "état de traitement",
+    "espace factures émises",
+    "portail de facturation",
+    "e-facturation",
+    "cycle de vie de la facture"
+  ],
+  "termes_saisie": [
+    "adresse électronique",
+    "mot de passe",
+    "numéro SIRET"
+  ],
+  "format_identifiant": "adresse électronique",
+  "racines_typo": [
+    "chorus-pro",
+    "choruspro",
+    "chorus"
+  ],
+  "couleurs": [
+    "#000091",
+    "#e1000f",
+    "#ffffff"
+  ],
+  "franceconnect": false,
+  "espaces_multiples": [
+    "fournisseur",
+    "entité publique",
+    "gestionnaire"
+  ],
+  "a_verifier": true,
+  "avertissement": "Le paysage de la facturation électronique de l'État évolue (portail public de facturation, réforme de la facturation électronique). Le domaine de référence doit être confirmé avant activation.",
+  "notes_verification": "Aucun domaine confirmé lors de ce travail. Marque à laisser désactivée tant que la vérification n'est pas faite."
+}

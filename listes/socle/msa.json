@@ -1,0 +1,31 @@
+{
+  "id": "msa",
+  "libelle": "MSA — Mutualité sociale agricole",
+  "criticite": 2,
+  "actif": false,
+  "domaines": ["msa.fr", "www.msa.fr"],
+  "domaine_principal": "msa.fr",
+  "domaines_verifies": ["msa.fr"],
+  "termes_forts": [
+    "mon espace privé MSA",
+    "mutualité sociale agricole",
+    "ma déclaration de revenus professionnels",
+    "mes prestations MSA",
+    "sécurité sociale agricole"
+  ],
+  "termes_faibles": [
+    "MSA", "exploitant agricole", "salarié agricole", "cotisations MSA",
+    "prestations familiales", "retraite agricole", "santé sécurité au travail",
+    "AT-MP", "DRP", "caisse MSA", "attestation MSA", "relevé de carrière",
+    "assurance maladie agricole", "employeur agricole", "TESA"
+  ],
+  "termes_saisie": ["numéro de sécurité sociale", "mot de passe", "identifiant"],
+  "format_identifiant": "13 chiffres + clé",
+  "racines_typo": ["msa", "mutualite-sociale", "mutualitesociale", "msa-services"],
+  "couleurs": ["#008a5e", "#004b8d", "#ffffff"],
+  "franceconnect": true,
+  "espaces_multiples": ["particulier", "exploitant", "entreprise"],
+  "a_verifier": true,
+  "avertissement": "La MSA fonctionne en caisses régionales avec de très nombreux domaines locaux du type msa-<region>.fr. Cette dispersion est un facteur de faux positifs majeur : ne pas activer cette marque tant que la liste des domaines régionaux n'est pas exhaustive et vérifiée.",
+  "notes_verification": "Recenser les 35 caisses régionales et leurs domaines avant activation. Marque à laisser désactivée dans le MVP si le recensement n'est pas terminé."
+}

@@ -1,0 +1,21 @@
+<!-- Page de test Tourmentin — reprend le vocabulaire réel de l'ANTS, servie
+     depuis son propre domaine (ants.gouv.fr dans le test), avec un champ
+     mot de passe hors <form> comme le fait la vraie mire (12.3.3.4). Spec
+     12.3.3.7 : doit rester N0 par Z2 (appartenance au socle), pas par
+     l'axe d'exposition ni par un score sous les seuils — Z2 passe avant Z5
+     et n'a jamais besoin de regarder les formulaires. -->
+<!doctype html>
+<html lang="fr">
+<head><meta charset="utf-8"><title>Page de test Tourmentin</title></head>
+<body style="font-family:system-ui,sans-serif;max-width:420px;margin:40px auto">
+<h1>Mon espace ANTS</h1>
+<p>Agence nationale des titres sécurisés — carte grise, permis, passeport.</p>
+<div>
+  <label for="i">Identifiant</label><br>
+  <input id="i" type="text" name="identifiant"><br>
+  <label for="p">Mot de passe</label><br>
+  <input id="p" type="password" name="mdp"><br>
+  <button type="button">Se connecter</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!-- Page de test Tourmentin — site fictif. Reconstruction REPRÉSENTATIVE du
+     gabarit des pages de connexion construites en JavaScript sans balise
+     <form> (Wix users.wix.com/signin, Salesforce Experience Cloud
+     *.my.site.com/.../s/login/, relevées en 12.3.3.5) : identifiant + mot de
+     passe rendus dans des <div>, autocomplete standard. PAS une copie exacte
+     — ces plateformes rendent leurs champs en JavaScript après chargement,
+     invisibles à une requête HTTP simple ; seule une vraie passe du harnais
+     sur les 15 hôtes réels (12.3.3.7, mesure avant acceptation) vaut
+     non-régression au sens strict. Ce gabarit vérifie seulement que la forme
+     générale — identifiant/mot de passe hors <form>, sans autre marqueur —
+     est bien collectée. -->
+<!doctype html>
+<html lang="fr">
+<head><meta charset="utf-8"><title>Page de test Tourmentin</title></head>
+<body style="font-family:system-ui,sans-serif;max-width:420px;margin:40px auto">
+<h1>Connexion</h1>
+<div class="login-form-implicite">
+  <div class="champ">
+    <label for="u">Identifiant</label>
+    <input id="u" type="text" autocomplete="username">
+  </div>
+  <div class="champ">
+    <label for="p">Mot de passe</label>
+    <input id="p" type="password" autocomplete="current-password">
+  </div>
+  <button type="button">Se connecter</button>
+</div>
+</body>
+</html>

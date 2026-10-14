@@ -1,0 +1,71 @@
+{
+  "id": "ants",
+  "libelle": "ANTS — Agence nationale des titres sécurisés",
+  "criticite": 3,
+  "actif": true,
+  "domaines": [
+    "ants.gouv.fr",
+    "immatriculation.ants.gouv.fr",
+    "permisdeconduire.ants.gouv.fr",
+    "passeport.ants.gouv.fr",
+    "ants.interieur.gouv.fr"
+  ],
+  "domaine_principal": "ants.gouv.fr",
+  "domaines_verifies": [
+    "ants.gouv.fr"
+  ],
+  "termes_forts": [
+    "agence nationale des titres sécurisés",
+    "demander un permis de conduire",
+    "pré-demande de passeport",
+    "mon espace ANTS"
+  ],
+  "termes_faibles": [
+    "ANTS",
+    "carte grise",
+    "certificat de situation administrative",
+    "carte nationale d'identité",
+    "titre sécurisé",
+    "code de cession",
+    "numéro de dossier",
+    "changement de titulaire",
+    "déclaration de cession",
+    "timbre fiscal",
+    "photo d'identité numérique",
+    "ANTAI",
+    "permis de conduire",
+    "passeport",
+    "immatriculation"
+  ],
+  "termes_saisie": [
+    "identifiant",
+    "mot de passe",
+    "numéro de dossier",
+    "code de cession",
+    "certificat d'immatriculation"
+  ],
+  "format_identifiant": "identifiant ANTS ou FranceConnect",
+  "racines_typo": [
+    "ants",
+    "carte-grise",
+    "cartegrise",
+    "immatriculation",
+    "permis-conduire"
+  ],
+  "couleurs": [
+    "#000091",
+    "#e1000f",
+    "#ffffff"
+  ],
+  "franceconnect": true,
+  "espaces_multiples": [
+    "particulier",
+    "professionnel de l'automobile"
+  ],
+  "a_verifier": true,
+  "notes_verification": "Marque très imitée par de faux sites de carte grise payants. Vérifier la liste des sous-domaines actifs.",
+  "url_connexion": "https://moncompte.ants.gouv.fr/connexion?lang=fr",
+  "url_connexion_finale": "https://moncompte.ants.gouv.fr/connexion",
+  "etape_connexion": "mot-de-passe",
+  "date_verification_connexion": "2026-09-21"
+}

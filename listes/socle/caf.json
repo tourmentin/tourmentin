@@ -1,0 +1,68 @@
+{
+  "id": "caf",
+  "libelle": "CAF / Caisse d'allocations familiales",
+  "criticite": 3,
+  "actif": true,
+  "domaines": [
+    "caf.fr",
+    "wwwd.caf.fr",
+    "connect.caf.fr",
+    "monenfant.fr"
+  ],
+  "domaine_principal": "caf.fr",
+  "domaines_verifies": [
+    "caf.fr"
+  ],
+  "termes_forts": [
+    "mon compte allocataire",
+    "déclarer mes ressources",
+    "mes paiements et mes droits"
+  ],
+  "termes_faibles": [
+    "caisse d'allocations familiales",
+    "CAF",
+    "CNAF",
+    "allocataire",
+    "prime d'activité",
+    "RSA",
+    "revenu de solidarité active",
+    "APL",
+    "aide au logement",
+    "allocations familiales",
+    "quotient familial",
+    "attestation de paiement",
+    "déclaration trimestrielle",
+    "AAH",
+    "PAJE"
+  ],
+  "termes_saisie": [
+    "numéro d'allocataire",
+    "code confidentiel",
+    "date de naissance"
+  ],
+  "format_identifiant": "7 chiffres",
+  "racines_typo": [
+    "caf",
+    "allocations-familiales",
+    "allocataire",
+    "cnaf"
+  ],
+  "couleurs": [
+    "#00539f",
+    "#e30613",
+    "#ffffff"
+  ],
+  "franceconnect": true,
+  "espaces_multiples": [
+    "allocataire",
+    "partenaire"
+  ],
+  "a_verifier": true,
+  "notes_verification": "URL de connexion non stabilisée lors du contrôle. Vérifier le chemin réel et les libellés.",
+  "mode_verification_connexion": "verification-manuelle",
+  "date_verification_connexion": "2026-09-22",
+  "url_connexion": "https://connect.caf.fr/",
+  "url_connexion_finale": "https://connect.caf.fr/",
+  "etape_connexion": "ecran-de-choix",
+  "url_connexion_hors_domaines": false
+}

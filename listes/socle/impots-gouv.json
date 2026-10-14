@@ -1,0 +1,75 @@
+{
+  "id": "impots-gouv",
+  "libelle": "Impôts / DGFiP",
+  "criticite": 3,
+  "actif": true,
+  "domaines": [
+    "impots.gouv.fr",
+    "cfspart.impots.gouv.fr",
+    "cfspart-idp.impots.gouv.fr",
+    "cfsmsa.impots.gouv.fr",
+    "cfspro.impots.gouv.fr",
+    "cfspro-idp.impots.gouv.fr"
+  ],
+  "domaine_principal": "impots.gouv.fr",
+  "domaines_verifies": [
+    "impots.gouv.fr",
+    "cfspart.impots.gouv.fr",
+    "cfspart-idp.impots.gouv.fr"
+  ],
+  "termes_forts": [
+    "votre espace particulier",
+    "gérer mon prélèvement à la source",
+    "déclarer mes revenus",
+    "gérer mes biens immobiliers"
+  ],
+  "termes_faibles": [
+    "impots.gouv.fr",
+    "DGFiP",
+    "direction générale des finances publiques",
+    "avis d'imposition",
+    "revenu fiscal de référence",
+    "taux de prélèvement",
+    "espace professionnel",
+    "télédéclaration",
+    "impôt sur le revenu",
+    "taxe d'habitation",
+    "taxe foncière",
+    "paiement en ligne",
+    "attestation fiscale",
+    "numéro d'accès en ligne",
+    "prélèvement à la source"
+  ],
+  "termes_saisie": [
+    "numéro fiscal",
+    "mot de passe",
+    "numéro d'accès en ligne",
+    "revenu fiscal de référence"
+  ],
+  "format_identifiant": "13 chiffres",
+  "racines_typo": [
+    "impot",
+    "impots",
+    "dgfip",
+    "finances-publiques",
+    "finances-gouv"
+  ],
+  "couleurs": [
+    "#000091",
+    "#e1000f",
+    "#ffffff"
+  ],
+  "franceconnect": true,
+  "espaces_multiples": [
+    "particulier",
+    "professionnel",
+    "collectivité",
+    "partenaire"
+  ],
+  "a_verifier": true,
+  "notes_verification": "Domaines confirmés par redirection HTTP observée le 09/09/2026. Termes forts issus de la connaissance du service, à confirmer sur la page de connexion réelle avant mise en production.",
+  "url_connexion": "https://cfspart.impots.gouv.fr/",
+  "date_verification_connexion": "2026-09-21",
+  "url_connexion_finale": "https://cfspart-idp.impots.gouv.fr/oauth2/authorize",
+  "etape_connexion": "mot-de-passe"
+}

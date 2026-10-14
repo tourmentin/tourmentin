@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tourmentin — Options</title>
+    <style>
+      body { font: 15px/1.5 system-ui, sans-serif; max-width: 640px; margin: 24px auto; padding: 0 16px; color: #1a1a1a; }
+      h1 { font-size: 20px; } h2 { font-size: 16px; margin-top: 32px; }
+      label.interrupteur { display: flex; align-items: center; gap: 8px; }
+      table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+      th, td { text-align: left; padding: 4px 6px; border-bottom: 1px solid #eee; }
+      button { cursor: pointer; }
+      .vide { color: #666; font-style: italic; }
+      .enregistre { color: #2E7D32; font-weight: 600; margin-left: 10px; }
+      .enregistre.erreur { color: #B42318; }
+      #alerte-service { background: #fdecea; border: 2px solid #B42318; color: #8a1a10; padding: 10px 12px; margin-bottom: 16px; font-weight: 600; }
+      #compteur-signalements { font-weight: 600; }
+      #annonce-mesure { background: #6D28D9; color: #fff; font-weight: 700; text-align: center; padding: 10px; margin: -24px -16px 20px; }
+      #vue-premier-lancement button { margin-top: 20px; padding: 10px 20px; font-size: 15px; }
+    </style>
+  </head>
+  <body>
+    <div id="annonce-mesure" role="alert" hidden>Build de mesure — ne pas distribuer</div>
+    <div id="alerte-service" role="alert" hidden></div>
+    <!--
+      14.6 point e, 14.9 : l'écran de premier lancement est une vue de cette
+      même page (`options.html#premier-lancement`), pas un document ni une
+      page séparée — évite un second point d'entrée à faire compiler par
+      crx() (seuls action.default_popup et options_ui.page le sont
+      automatiquement) et donne gratuitement le lien de relecture demandé.
+    -->
+    <section id="vue-premier-lancement" hidden>
+      <h1>Tourmentin — version d'essai</h1>
+      <p>Vous testez une version qui n'est pas encore terminée.</p>
+      <p><strong>Le silence ne veut rien dire.</strong> Si Tourmentin ne dit rien sur une page, cela ne prouve pas que la page est sûre. Personne n'a encore mesuré combien de faux sites Tourmentin laisse passer sans réagir.</p>
+      <p><strong>Rien ne doit changer dans vos habitudes.</strong> Vérifiez les adresses comme avant. Ne saisissez jamais un mot de passe si quelque chose vous semble étrange, que Tourmentin ait réagi ou non.</p>
+      <p><strong>Protocole de test :</strong> ne saisissez jamais un mot de passe sur une page qui vous semble louche, même pour tester Tourmentin. Ouvrez les liens reçus par courriel depuis le navigateur plutôt que depuis votre messagerie. Notez ce que Tourmentin a dit, et ce qu'il aurait dû dire.</p>
+      <!--
+        14.9 : texte de repli tant que 14.10 (allowlist collaborative) n'est
+        pas codé -- vrai pour ce build ; à remplacer par le texte définitif
+        de 14.9 le jour où 14.10 est implémenté.
+      -->
+      <!-- 14.30 : texte de 14.9 remplacé maintenant que l'envoi existe (le texte de repli « Rien n'est jamais envoyé » ne vaut plus). À valider par Ph avant toute remise. -->
+      <p>Tourmentin analyse les pages sur votre appareil. Rien de ce que vous consultez ou saisissez n'est envoyé sans que vous le décidiez : quand vous déclarez une page, Tourmentin vous montre exactement ce qui partirait vers tourmentin.fr (adresse, texte visible nettoyé, adresses d'images — jamais ce que vous avez saisi), et n'envoie rien avant votre confirmation. Vous pouvez désactiver tout envoi dans les paramètres (« Ne jamais envoyer »).</p>
+      <!-- 14.39 point 4 : texte validé par Ph, mot pour mot ; affiché seulement dans un build qui télécharge réellement les listes. -->
+      <p id="information-listes-premier-lancement" hidden>Pour rester à jour, Tourmentin télécharge chaque heure la liste des sites vérifiés depuis tourmentin.fr. Cette opération n'envoie aucune information sur vous ni sur les pages que vous visitez.</p>
+      <button id="bouton-compris">J'ai compris</button>
+    </section>
+
+    <!--
+      14.13 point 3, 14.15 point 2 : « Comment vérifier une adresse », vue
+      statique de cette page (`#verifier`), sans aucune requête réseau, sur le
+      modèle de #premier-lancement. Ouverte depuis le lien du bandeau N2.
+    -->
+    <section id="vue-verifier" hidden>
+      <h1>Comment vérifier une adresse</h1>
+      <ol>
+        <li>L'adresse d'un site se lit après « https:// » et avant la barre oblique suivante : dans « https://assure.ameli.fr/connexion », c'est « assure.ameli.fr ». Ce qui vient après cette barre ne dit pas chez qui vous êtes.</li>
+        <li>Ce qui compte, c'est la fin de cette adresse. « impots.gouv.fr » est le site des impôts ; « impots.gouv.fr.paiement-exemple.com » ne l'est pas : il se termine par « paiement-exemple.com ».</li>
+        <li>Une lettre ou un tiret de différence, c'est un autre site : « impots-gouv.fr » n'est pas « impots.gouv.fr ».</li>
+        <li>Le cadenas ne prouve rien sur le site : il dit que la connexion est chiffrée, pas que vous êtes au bon endroit.</li>
+        <li>Ne suivez pas le lien d'un message : tapez vous-même l'adresse officielle, ou ouvrez un favori que vous avez créé.</li>
+        <li>Dans le doute, ne saisissez rien. Appelez l'organisme avec le numéro d'un courrier officiel, et signalez le message : Signal Spam (courriel), 33700 (SMS), Cybermalveillance.</li>
+      </ol>
+      <p><a href="#parametres">Aller aux options</a></p>
+    </section>
+
+    <section id="vue-parametres">
+      <h1>Tourmentin — Options</h1>
+
+      <p><a href="#premier-lancement" id="lien-avertissement">Relire l'avertissement de premier lancement</a></p>
+
+      <h2>Envoi à tourmentin.fr</h2>
+      <p>Quand vous déclarez une page (« Cette page est frauduleuse », « Signaler comme site officiel »), Tourmentin peut en envoyer une copie à tourmentin.fr : l'adresse (sans la partie après « ? » ou « # »), la marque évoquée, les signaux du moteur, le texte visible de la page (nettoyé des adresses e-mail, numéros de téléphone et IBAN) et les adresses de ses images. <strong>Jamais ce que vous avez saisi dans les champs.</strong></p>
+      <fieldset id="mode-envoi">
+        <legend>Envoi <span id="enregistre-mode-envoi" class="enregistre" role="status" aria-live="polite"></span></legend>
+        <label><input type="radio" name="mode-envoi" value="jamais" /> Ne jamais envoyer</label><br />
+        <label><input type="radio" name="mode-envoi" value="demander" /> Me demander avant chaque envoi (par défaut)</label><br />
+        <label><input type="radio" name="mode-envoi" value="automatique" /> Envoyer automatiquement</label>
+      </fieldset>
+      <p id="note-envoi" class="vide">Avec « Ne jamais envoyer », aucune déclaration ni liaison de compte ne part vers tourmentin.fr. Le téléchargement des listes (voir « Listes signées » plus bas) ne dépend pas de ce réglage : il n'envoie rien vous concernant.</p>
+
+      <h3>Compte tourmentin.fr</h3>
+      <p id="etat-liaison" class="vide"></p>
+      <p>Pour lier ce navigateur à votre compte, générez un code sur <a href="https://tourmentin.fr/gestion/liaison" target="_blank" rel="noopener noreferrer">tourmentin.fr/gestion/liaison</a>, puis collez-le ici <strong>une seule fois</strong>. Le serveur vérifie votre rôle à chaque action : cette extension n'est jamais la source de vérité sur le rôle.</p>
+      <p><label for="code-liaison">Code de liaison</label> <input type="text" id="code-liaison" maxlength="40" autocomplete="off" /> <button id="lier">Lier ce navigateur</button> <button id="delier">Délier</button></p>
+      <p id="resultat-liaison" class="vide"></p>
+
+      <h2>Pages de connexion inconnues</h2>
+      <label for="mode-avertissement">Avertir sur les pages de connexion inconnues</label>
+      <select id="mode-avertissement">
+        <option value="une-fois">Une fois par site</option>
+        <option value="chaque-visite">À chaque visite</option>
+        <option value="jamais">Jamais</option>
+      </select><span id="enregistre-avertissement" class="enregistre" role="status" aria-live="polite"></span>
+      <p>Sur une page avec un champ mot de passe, d'un site que Tourmentin ne connaît pas et qu'il ne juge pas suspect, un bandeau discret vous rappelle de vérifier l'adresse. Rien n'est envoyé ; la mémoire des sites déjà vus reste sur cet ordinateur.</p>
+
+      <h2>Journal local</h2>
+      <label class="interrupteur"><input type="checkbox" id="interrupteur-journal" /> Activer le journal (désactivé par défaut)<span id="enregistre-journal" class="enregistre" role="status" aria-live="polite"></span></label>
+      <p>Le journal enregistre automatiquement les pages de niveau N1 et au-dessus : adresse (sans la partie après « ? » ou « # »), niveau, motif. Jamais transmis.</p>
+      <button id="effacer-journal">Effacer le journal</button>
+      <button id="exporter-journal">Exporter le journal (fichier)</button>
+      <table id="table-journal"><thead><tr><th>Date</th><th>Adresse</th><th>Niveau</th><th>Motif</th></tr></thead><tbody></tbody></table>
+
+      <h2>Signalements (« Cette page est frauduleuse », « Signaler comme site officiel »)</h2>
+      <p>Liste distincte du journal, indépendante de son interrupteur. <span id="compteur-signalements"></span> Aucune expiration automatique : ils ne partent que sur commande.</p>
+      <button id="exporter-signalements">Exporter les signalements (fichier)</button>
+      <table id="table-signalements"><thead><tr><th>Date</th><th>Adresse</th><th>Niveau</th><th>Motif</th><th></th></tr></thead><tbody></tbody></table>
+      <h2>Exporter</h2>
+      <p>L'export écrit un fichier lisible sur cet ordinateur. Rien n'est envoyé par Tourmentin : relisez le fichier, puis transmettez-le vous-même si vous le souhaitez. Il contient les adresses (sans la partie après « ? » ou « # »), le niveau, le motif et la marque évoquée — ni le contenu des pages, ni rien de ce que vous avez saisi.</p>
+
+      <h2>Compatibilité de ce navigateur</h2>
+      <ul id="compat">
+        <li>Navigateur : <span id="compat-navigateur">…</span></li>
+        <li>Signature Ed25519 : <span id="compat-ed25519">vérification…</span></li>
+        <li>Mise à jour horaire des listes : <span id="compat-alarme">vérification…</span></li>
+      </ul>
+
+      <h2>Listes signées</h2>
+      <p id="information-listes" hidden>Tourmentin télécharge chaque heure la liste des sites vérifiés. Aucune information vous concernant n'est envoyée à cette occasion.</p>
+      <p id="etat-listes" class="vide"></p>
+
+      <p id="versions" class="vide"></p>
+    </section>
+
+    <script type="module" src="./options.ts"></script>
+  </body>
+</html>

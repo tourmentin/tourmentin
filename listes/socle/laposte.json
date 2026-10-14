@@ -1,0 +1,74 @@
+{
+  "id": "laposte",
+  "libelle": "La Poste",
+  "criticite": 3,
+  "actif": true,
+  "domaines": [
+    "laposte.fr",
+    "www.laposte.fr",
+    "laposte.net",
+    "moncompte.laposte.fr",
+    "colissimo.fr",
+    "particulier.laposte.fr",
+    "professionnels.laposte.fr"
+  ],
+  "domaine_principal": "laposte.fr",
+  "domaines_verifies": [
+    "laposte.fr",
+    "laposte.net"
+  ],
+  "termes_forts": [
+    "votre colis est en attente",
+    "mon compte La Poste",
+    "avis de passage"
+  ],
+  "termes_faibles": [
+    "La Poste",
+    "Colissimo",
+    "lettre suivie",
+    "point relais",
+    "bureau de poste",
+    "affranchissement",
+    "réexpédition",
+    "lettre recommandée",
+    "facteur",
+    "livraison à domicile",
+    "boîte aux lettres",
+    "laposte.net",
+    "identité numérique",
+    "frais de douane",
+    "frais de livraison",
+    "suivre mon colis"
+  ],
+  "termes_saisie": [
+    "identifiant",
+    "mot de passe",
+    "adresse électronique",
+    "numéro de suivi"
+  ],
+  "format_identifiant": "adresse électronique ou numéro de client",
+  "racines_typo": [
+    "laposte",
+    "la-poste",
+    "colissimo",
+    "suivi-colis",
+    "suiviposte"
+  ],
+  "couleurs": [
+    "#ffd102",
+    "#003da5",
+    "#ffffff"
+  ],
+  "franceconnect": false,
+  "espaces_multiples": [
+    "particulier",
+    "professionnel",
+    "webmail laposte.net"
+  ],
+  "a_verifier": true,
+  "notes_verification": "Marque la plus imitée en France. Le schéma d'attaque dominant est le faux suivi de colis réclamant quelques euros de frais. Le signal E le plus utile ici n'est pas le mot de passe mais la présence d'un formulaire de carte bancaire : prévoir un terme de saisie dédié au paiement dans le moteur.",
+  "signal_specifique": "presence_champ_carte_bancaire",
+  "url_connexion_motif_echec": "bouton « Se connecter » construit en script, sans adresse ; le clic n'a produit ni navigation ni URL lisible",
+  "mode_verification_connexion": "verification-manuelle",
+  "date_verification_connexion": "2026-09-22"
+}

@@ -1,0 +1,71 @@
+{
+  "id": "service-public",
+  "libelle": "Service-Public.fr",
+  "criticite": 2,
+  "actif": true,
+  "domaines": [
+    "service-public.fr",
+    "psl.service-public.fr",
+    "entreprendre.service-public.fr",
+    "demarches.service-public.fr",
+    "service-public.gouv.fr",
+    "auth.service-public.gouv.fr"
+  ],
+  "domaine_principal": "service-public.gouv.fr",
+  "domaines_verifies": [
+    "service-public.fr",
+    "service-public.gouv.fr",
+    "auth.service-public.gouv.fr"
+  ],
+  "termes_forts": [
+    "le site officiel de l'administration française",
+    "mon espace service-public",
+    "questions-réponses de l'administration"
+  ],
+  "termes_faibles": [
+    "service-public.fr",
+    "administration française",
+    "démarche administrative",
+    "DILA",
+    "fiche pratique",
+    "annuaire de l'administration",
+    "formulaire Cerfa",
+    "état civil",
+    "papiers citoyenneté",
+    "logement",
+    "social santé",
+    "argent impôts",
+    "justice",
+    "étranger Europe",
+    "transports mobilité",
+    "mes démarches en ligne",
+    "porte-documents"
+  ],
+  "termes_saisie": [
+    "adresse électronique",
+    "mot de passe"
+  ],
+  "format_identifiant": "adresse électronique",
+  "racines_typo": [
+    "service-public",
+    "servicepublic",
+    "mon-service-public",
+    "dila"
+  ],
+  "couleurs": [
+    "#000091",
+    "#e1000f",
+    "#ffffff"
+  ],
+  "franceconnect": true,
+  "espaces_multiples": [
+    "particulier",
+    "entreprise"
+  ],
+  "a_verifier": true,
+  "notes_verification": "Termes forts à confirmer, notamment la baseline exacte affichée en page d'accueil. Domaines service-public.gouv.fr et auth.service-public.gouv.fr ajoutés le 21/09/2026 : source, redirection observée par le navigateur du harnais le 15/09/2026 (mire servie par auth.service-public.gouv.fr, adresse de retour www.service-public.gouv.fr) — le service a migré de domaine enregistrable (12.3.3.2).",
+  "url_connexion": "https://www.service-public.gouv.fr/compte/se-connecter",
+  "date_verification_connexion": "2026-09-21",
+  "url_connexion_finale": "https://auth.service-public.gouv.fr/realms/service-public/protocol/openid-connect/auth",
+  "etape_connexion": "mot-de-passe"
+}

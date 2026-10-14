@@ -1,0 +1,26 @@
+<!-- ARTEFACT DE TEST TOURMENTIN — imite le vocabulaire d'un service Assurance
+     Maladie / ameli à seule fin de test du détecteur. Aucun logo, aucune image,
+     aucune police de marque. Ne représente aucun site réel.
+
+     Spec 12.3.3.6 : calqué sur la vraie mire d'ameli, vérifiée à la main le
+     22/09/2026 — un seul champ d'identifiant (« numéro de sécurité sociale »),
+     SANS mot de passe, hors de toute balise <form>. C'est le premier écran
+     réel de la marque de santé la plus imitée : si une copie fidèle de cette
+     page n'offre de prise ni à E1 (pas de password) ni à E2 (champ hors
+     formulaire), elle échappe entièrement à l'axe d'exposition. -->
+<!doctype html>
+<html lang="fr">
+<head><meta charset="utf-8"><title>Page de test Tourmentin</title></head>
+<body style="font-family:system-ui,sans-serif;max-width:420px;margin:40px auto">
+<div style="background:#b91c1c;color:#fff;padding:10px;text-align:center;font-weight:600">
+  ⚠ ARTEFACT DE TEST TOURMENTIN — imitation fictive, aucun rapport avec un site réel
+</div>
+<h1>Mon compte ameli</h1>
+<p>Assurance Maladie — CPAM, attestation de droits, feuille de soins.</p>
+<div>
+  <label for="nss">Numéro de sécurité sociale</label><br>
+  <input id="nss" type="text" name="nss" autocomplete="off"><br>
+  <button type="button" onclick="void 0">Continuer</button>
+</div>
+</body>
+</html>

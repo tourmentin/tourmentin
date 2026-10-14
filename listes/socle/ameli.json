@@ -1,0 +1,71 @@
+{
+  "id": "ameli",
+  "libelle": "Assurance Maladie / ameli",
+  "criticite": 3,
+  "actif": true,
+  "domaines": [
+    "ameli.fr",
+    "assure.ameli.fr",
+    "compte.ameli.fr",
+    "espacepro.ameli.fr"
+  ],
+  "domaine_principal": "ameli.fr",
+  "domaines_verifies": [
+    "ameli.fr",
+    "assure.ameli.fr"
+  ],
+  "termes_forts": [
+    "mon compte ameli",
+    "ma carte vitale"
+  ],
+  "termes_faibles": [
+    "assurance maladie",
+    "ameli",
+    "CPAM",
+    "caisse primaire d'assurance maladie",
+    "attestation de droits",
+    "médecin traitant",
+    "feuille de soins",
+    "arrêt de travail",
+    "indemnités journalières",
+    "tiers payant",
+    "complémentaire santé solidaire",
+    "relevé d'honoraires",
+    "mon espace santé",
+    "affection de longue durée",
+    "carte européenne d'assurance maladie",
+    "mes remboursements"
+  ],
+  "termes_saisie": [
+    "numéro de sécurité sociale",
+    "code personnel",
+    "mot de passe"
+  ],
+  "format_identifiant": "13 chiffres + clé de 2 chiffres",
+  "racines_typo": [
+    "ameli",
+    "assurance-maladie",
+    "assurancemaladie",
+    "cpam",
+    "carte-vitale"
+  ],
+  "couleurs": [
+    "#0c419a",
+    "#e2001a",
+    "#ffffff"
+  ],
+  "franceconnect": true,
+  "espaces_multiples": [
+    "assuré",
+    "professionnel de santé",
+    "employeur"
+  ],
+  "a_verifier": true,
+  "notes_verification": "Page de connexion non lisible automatiquement (robots.txt). Termes à confirmer visuellement.",
+  "mode_verification_connexion": "verification-manuelle",
+  "date_verification_connexion": "2026-09-22",
+  "url_connexion": "https://assure.ameli.fr/",
+  "url_connexion_finale": "https://assure.ameli.fr/",
+  "etape_connexion": "identifiant",
+  "url_connexion_hors_domaines": false
+}

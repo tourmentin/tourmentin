@@ -1,0 +1,77 @@
+{
+  "id": "urssaf",
+  "libelle": "Urssaf",
+  "criticite": 2,
+  "actif": true,
+  "domaines": [
+    "urssaf.fr",
+    "www.urssaf.fr",
+    "autoentrepreneur.urssaf.fr",
+    "mon.urssaf.fr",
+    "cesu.urssaf.fr",
+    "pajemploi.urssaf.fr"
+  ],
+  "domaine_principal": "urssaf.fr",
+  "domaines_verifies": [
+    "urssaf.fr",
+    "autoentrepreneur.urssaf.fr"
+  ],
+  "termes_forts": [
+    "mon compte Urssaf",
+    "déclarer mon chiffre d'affaires",
+    "attestation de vigilance",
+    "échéancier de paiement",
+    "compte auto-entrepreneur"
+  ],
+  "termes_faibles": [
+    "Urssaf",
+    "cotisations sociales",
+    "auto-entrepreneur",
+    "micro-entrepreneur",
+    "travailleur indépendant",
+    "CESU",
+    "Pajemploi",
+    "déclaration sociale nominative",
+    "attestation de marché public",
+    "recouvrement",
+    "prélèvement automatique",
+    "taux de cotisation",
+    "assiette",
+    "exonération",
+    "ACRE"
+  ],
+  "termes_saisie": [
+    "numéro SIRET",
+    "adresse électronique",
+    "mot de passe",
+    "numéro de sécurité sociale"
+  ],
+  "format_identifiant": "SIRET (14 chiffres) ou adresse électronique",
+  "racines_typo": [
+    "urssaf",
+    "auto-entrepreneur",
+    "autoentrepreneur",
+    "cesu",
+    "pajemploi"
+  ],
+  "couleurs": [
+    "#00468c",
+    "#e2001a",
+    "#ffffff"
+  ],
+  "franceconnect": true,
+  "espaces_multiples": [
+    "auto-entrepreneur",
+    "employeur",
+    "travailleur indépendant",
+    "particulier employeur"
+  ],
+  "a_verifier": true,
+  "notes_verification": "Vérifier les sous-domaines de connexion réels, ils ont changé plusieurs fois.",
+  "mode_verification_connexion": "verification-manuelle",
+  "date_verification_connexion": "2026-09-22",
+  "url_connexion": "https://login.urssaf.fr/",
+  "url_connexion_finale": "https://login.urssaf.fr/",
+  "etape_connexion": "mot-de-passe",
+  "url_connexion_hors_domaines": false
+}

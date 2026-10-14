@@ -1,0 +1,70 @@
+{
+  "id": "france-travail",
+  "libelle": "France Travail (ex-Pôle emploi)",
+  "criticite": 3,
+  "actif": true,
+  "domaines": [
+    "francetravail.fr",
+    "candidat.francetravail.fr",
+    "entreprise.francetravail.fr",
+    "francetravail.io",
+    "pole-emploi.fr",
+    "candidat.pole-emploi.fr"
+  ],
+  "domaine_principal": "francetravail.fr",
+  "domaines_verifies": [
+    "francetravail.fr"
+  ],
+  "termes_forts": [
+    "mon espace candidat",
+    "actualiser ma situation",
+    "identifiant France Travail",
+    "mon inscription comme demandeur d'emploi",
+    "mes allocations chômage"
+  ],
+  "termes_faibles": [
+    "France Travail",
+    "Pôle emploi",
+    "demandeur d'emploi",
+    "actualisation mensuelle",
+    "allocation de retour à l'emploi",
+    "ARE",
+    "offre d'emploi",
+    "conseiller référent",
+    "attestation employeur",
+    "radiation",
+    "actualisation",
+    "mon CV",
+    "formation professionnelle",
+    "indemnisation",
+    "avis de situation"
+  ],
+  "termes_saisie": [
+    "identifiant",
+    "mot de passe",
+    "numéro d'identifiant"
+  ],
+  "format_identifiant": "identifiant alphanumérique attribué à l'inscription",
+  "racines_typo": [
+    "francetravail",
+    "france-travail",
+    "poleemploi",
+    "pole-emploi"
+  ],
+  "couleurs": [
+    "#0c1444",
+    "#ff6f4c",
+    "#ffffff"
+  ],
+  "franceconnect": true,
+  "espaces_multiples": [
+    "candidat",
+    "entreprise"
+  ],
+  "a_verifier": true,
+  "notes_verification": "Bascule Pôle emploi vers France Travail au 01/01/2024. Conserver les deux racines : les campagnes de phishing exploitent encore l'ancienne marque.",
+  "url_connexion": "https://candidat.francetravail.fr/espacepersonnel/",
+  "url_connexion_finale": "https://authentification-candidat.francetravail.fr/connexion/XUI/",
+  "etape_connexion": "mot-de-passe",
+  "date_verification_connexion": "2026-09-21"
+}

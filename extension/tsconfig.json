@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    // DOM ajouté pour adaptateurs/contenu/arriere-plan (lot L3). src/moteur/
+    // reste sans dépendance navigateur, mais ce n'est plus vérifié par
+    // l'absence de la lib DOM dans ce tsconfig unique : c'est le rôle de
+    // tests/unitaires/purete.test.ts, qui scanne le texte source et ne
+    // dépend d'aucune configuration TypeScript.
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "noEmit": true
+  },
+  "include": ["src", "tests", "manifest.config.ts", "vite.config.ts", "scripts"]
+}

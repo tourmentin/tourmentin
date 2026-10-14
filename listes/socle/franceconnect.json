@@ -1,0 +1,65 @@
+{
+  "id": "franceconnect",
+  "libelle": "FranceConnect",
+  "criticite": 3,
+  "actif": true,
+  "domaines": [
+    "franceconnect.gouv.fr",
+    "app.franceconnect.gouv.fr",
+    "auth.franceconnect.gouv.fr"
+  ],
+  "domaine_principal": "franceconnect.gouv.fr",
+  "domaines_verifies": [
+    "franceconnect.gouv.fr"
+  ],
+  "termes_forts": [
+    "s'identifier avec FranceConnect",
+    "FranceConnect est la solution proposée par l'État",
+    "choisissez un compte pour vous connecter",
+    "FranceConnect+",
+    "identité numérique La Poste"
+  ],
+  "termes_faibles": [
+    "FranceConnect",
+    "fournisseur d'identité",
+    "compte Ameli",
+    "compte impots.gouv.fr",
+    "compte MSA",
+    "identité numérique",
+    "mire de connexion",
+    "DINUM",
+    "connexion sécurisée",
+    "historique des connexions",
+    "gérer mes accès",
+    "France Identité",
+    "niveau de garantie",
+    "eIDAS",
+    "fournisseur de service"
+  ],
+  "termes_saisie": [
+    "identifiant",
+    "mot de passe"
+  ],
+  "format_identifiant": "dépend du fournisseur d'identité choisi",
+  "racines_typo": [
+    "franceconnect",
+    "france-connect",
+    "fc-gouv"
+  ],
+  "couleurs": [
+    "#000091",
+    "#e1000f",
+    "#ffffff"
+  ],
+  "franceconnect": true,
+  "espaces_multiples": [
+    "FranceConnect",
+    "FranceConnect+"
+  ],
+  "a_verifier": true,
+  "priorite_detection": "maximale",
+  "notes_verification": "Cible d'imitation la plus rentable : une fausse mire FranceConnect donne accès à l'ensemble des services connectés. La détection doit être plus stricte que la moyenne, avec un seuil abaissé de 10 points.",
+  "url_connexion_motif_echec": "pas de mire propre : accessible seulement depuis le bouton d'un service partenaire, qui mène à l'écran de choix du fournisseur d'identité et lancerait une authentification réelle — non vérifié pour cette raison",
+  "mode_verification_connexion": "verification-manuelle",
+  "date_verification_connexion": "2026-09-22"
+}

@@ -1,0 +1,14 @@
+Tourmentin
+Copyright (C) 2026 DE-TENTES ET CLAPOTIS LA VERONNIERE <contact@tourmentin.fr>
+
+Le code de Tourmentin (extension, outils de listes, serveur) est distribué sous la
+licence GNU Affero General Public License, version 3 ou ultérieure
+(SPDX : AGPL-3.0-or-later). Le texte complet figure dans le fichier LICENSE.
+
+Les listes de sites (données) ne sont pas couvertes par cette licence : leur
+licence n'est pas encore décidée.
+
+Composants tiers embarqués dans l'extension :
+- tldts et tldts-core 7.4.12, licence MIT (https://github.com/remusao/tldts).
+  Ils embarquent une version compilée de la liste des suffixes publics
+  (Public Suffix List, https://publicsuffix.org/), distribuée sous licence MPL-2.0.
