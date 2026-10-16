@@ -12,6 +12,7 @@ import { ecrireZip } from './ecrire-zip.mjs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CSS_COMMUN, FAVICON, COURRIEL, entete, pied } from '../../site/identite.mjs';
+import { TITRE_CE_QUE_TOURMENTIN_LIT, TEXTE_CE_QUE_TOURMENTIN_LIT } from '../../site/texte-ce-que-tourmentin-lit.mjs';
 
 const RACINE = join(dirname(fileURLToPath(import.meta.url)), '..');
 const CHROME = join(RACINE, 'dist', 'chrome-essai');
@@ -92,6 +93,9 @@ ${entete()}
 <p><strong>Version d'essai : le silence ne veut rien dire.</strong> Vous testez une version qui n'est pas encore terminée. Si Tourmentin ne dit rien sur une page, cela ne prouve pas que la page est sûre. Personne n'a encore mesuré combien de faux sites Tourmentin laisse passer sans réagir.</p>
 <p><strong>Rien ne doit changer dans vos habitudes.</strong> Vérifiez les adresses comme avant. Ne saisissez jamais un mot de passe si quelque chose vous semble étrange, que Tourmentin ait réagi ou non.</p>
 </div>
+
+<h2>${TITRE_CE_QUE_TOURMENTIN_LIT}</h2>
+<p>${TEXTE_CE_QUE_TOURMENTIN_LIT}</p>
 
 <h2>Installer sur Brave ou Chrome</h2>
 <p><a class="bouton" href="${BASE}${nomZip}">Télécharger Tourmentin-essai-${version}.zip</a></p>
