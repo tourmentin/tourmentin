@@ -8,7 +8,7 @@
 // Refuse si le build est « modifié » (arbre non propre) : on ne remet que ce qui est commité.
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { execFileSync } from 'node:child_process';
+import { ecrireZip } from './ecrire-zip.mjs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CSS_COMMUN, FAVICON, COURRIEL, entete, pied } from '../../site/identite.mjs';
@@ -31,9 +31,9 @@ const version = man.version;
 rmSync(SORTIE, { recursive: true, force: true });
 mkdirSync(SORTIE, { recursive: true });
 
-// zip : tar de Windows (bsdtar) écrit des chemins relatifs avec « / » ; le dossier du build devient la racine de l'archive
+// zip : écrivain du projet (14.59), lisible par l'Explorateur Windows ; le dossier du build devient la racine de l'archive
 const nomZip = `Tourmentin-essai-${version}.zip`;
-execFileSync(process.env.SystemRoot ? join(process.env.SystemRoot, 'System32', 'tar.exe') : 'tar', ['-a', '-c', '-f', join(SORTIE, nomZip), '-C', CHROME, '.']);
+ecrireZip(CHROME, join(SORTIE, nomZip));
 
 // .xpi signé (facultatif)
 const xpis = existsSync(SIGNE) ? readdirSync(SIGNE).filter((f) => f.endsWith('.xpi')) : [];
@@ -117,7 +117,7 @@ ${blocFirefox}
 <p>Pour rester à jour, Tourmentin télécharge chaque heure la liste des sites vérifiés depuis tourmentin.fr. Cette opération n'envoie aucune information sur vous ni sur les pages que vous visitez.</p>
 
 <h2>Licence</h2>
-<p>Tourmentin est libre (licence AGPL-3.0, code publié après relecture) : son code est sous licence GNU AGPL version 3 ou ultérieure (AGPL-3.0-or-later). Le texte de la licence est dans le fichier <code>LICENSE</code> de chaque archive. La licence des listes de sites n'est pas encore décidée.</p>
+<p>Tourmentin est libre (licence AGPL-3.0) : son code est sous licence GNU AGPL version 3 ou ultérieure (AGPL-3.0-or-later). Le texte de la licence est dans le fichier <code>LICENSE</code> de chaque archive. La licence des listes de sites n'est pas encore décidée.</p>
 
 <h2>Signaler un problème</h2>
 <p>Pour signaler un problème ou une fausse alerte, écrivez à ${COURRIEL}, ou adressez-vous à la personne qui vous a invité à tester Tourmentin. Dites-lui l'adresse de la page, ce que Tourmentin a affiché, et ce qu'il aurait dû afficher. Ne lui transmettez jamais un mot de passe.</p>
