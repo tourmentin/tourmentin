@@ -21,7 +21,7 @@ function git(...args: string[]): string {
 
 /**
  * 14.19 E : `version` = 0.P.N (P = palier, N = nombre de commits qui touchent extension/, calculé à la construction :
- * monotone, reproductible, aucun fichier à incrémenter). `version_name` = « essai P · spec X.YY · <hash court> », suivi de
+ * monotone, reproductible, aucun fichier à incrémenter). `version_name` = « spec X.YY · <hash court> » (14.73 : le mot « essai » est retiré), suivi de
  * « · mesure » pour le build de mesure et de « · modifié » si l'arbre de travail n'est pas commité : un build non commité ne
  * peut pas se faire passer pour un commit.
  */
@@ -36,7 +36,7 @@ export function infoBuild(): { version: string; versionName: string } {
   } catch {
     // spec absente (extraction hors dépôt) : « ? »
   }
-  return { version: `0.${PALIER}.${n}`, versionName: `essai ${PALIER} · spec ${spec} · ${hash}${mesure ? ' · mesure' : ''}${modifie ? ' · modifié' : ''}` };
+  return { version: `0.${PALIER}.${n}`, versionName: `spec ${spec} · ${hash}${mesure ? ' · mesure' : ''}${modifie ? ' · modifié' : ''}` };
 }
 
 export default defineManifest((env) => {
@@ -59,12 +59,19 @@ export default defineManifest((env) => {
     version_name: versionName,
     // 14.26 étape 3 : la signature Ed25519 par WebCrypto (clé d'installation non exportable) exige Chrome 137.
     ...(firefox ? {} : { minimum_chrome_version: '137' }),
-    permissions: ['storage', 'scripting', 'webNavigation', 'alarms'],
+    // 14.69 : « scripting » retirée (déclarée, jamais utilisée : les scripts de contenu sont statiques).
+    permissions: ['storage', 'webNavigation', 'alarms'],
     host_permissions: ['<all_urls>'],
     // 14.6 : popup (b, d), page d'options (c). Pas d'icône dédiée par niveau
     // (14.2.2, manque non résolu) : le badge de l'action en tient lieu
     // (service-worker.ts, appliquerBadge).
-    action: { default_popup: 'src/popup/popup.html', default_title: 'Tourmentin' },
+    // 14.69 : icônes (logo à voile bombée) ; le badge de l'action reste porté par le service worker (14.2.2).
+    icons: { 16: 'src/icones/icone-16.png', 32: 'src/icones/icone-32.png', 48: 'src/icones/icone-48.png', 128: 'src/icones/icone-128.png' },
+    action: {
+      default_popup: 'src/popup/popup.html',
+      default_title: 'Tourmentin',
+      default_icon: { 16: 'src/icones/icone-16.png', 32: 'src/icones/icone-32.png' },
+    },
     options_ui: { page: 'src/options/options.html', open_in_tab: true },
     content_scripts: [
       {

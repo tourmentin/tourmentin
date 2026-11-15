@@ -23,7 +23,7 @@ const attendre = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const manifeste = JSON.parse(readFileSync(join(DIST, 'manifest.json'), 'utf8'));
 verifier('manifeste : la permission « dom » n\'existe plus', !manifeste.permissions.includes('dom'), manifeste.permissions.join(','));
-verifier('manifeste : version 0.P.N et version_name « essai P · spec X.YY · hash »', /^0\.1\.\d+$/.test(manifeste.version) && /^essai 1 · spec \d+\.\d+ · [0-9a-f]{7,}( · modifié)?$/.test(manifeste.version_name), `${manifeste.version} | ${manifeste.version_name}`);
+verifier('manifeste : version 0.P.N et version_name « spec X.YY · hash »', /^0\.1\.\d+$/.test(manifeste.version) && /^spec \d+\.\d+ · [0-9a-f]{7,}( · modifié)?$/.test(manifeste.version_name), `${manifeste.version} | ${manifeste.version_name}`);
 
 const context = await chromium.launchPersistentContext(mkdtempSync(join(tmpdir(), 'tourmentin-erreurs-')), {
   channel: 'chromium', headless: false,
@@ -148,15 +148,11 @@ verifier('options : « Délier » répond', true);
 await opt.locator('#effacer-journal').click();
 await opt.waitForTimeout(400);
 
-// exports (téléchargements) et effacement d'un signalement
-for (const bouton of ['#exporter-journal', '#exporter-signalements']) {
+// export (téléchargement) du journal ; la section Signalements n'existe plus dans les options (14.84)
+for (const bouton of ['#exporter-journal']) {
   const [dl] = await Promise.all([opt.waitForEvent('download', { timeout: 4000 }).catch(() => null), opt.locator(bouton).click()]);
   verifier(`options : ${bouton} produit un fichier`, !!dl, dl ? dl.suggestedFilename() : 'aucun téléchargement');
 }
-const nbAvant = await opt.locator('#table-signalements tbody tr').count();
-const effacer = opt.locator('#table-signalements button', { hasText: 'Effacer' }).first();
-if (await effacer.count()) { await effacer.click(); await opt.waitForTimeout(500); }
-verifier('options : « Effacer » un signalement en retire une ligne', (await opt.locator('#table-signalements button', { hasText: 'Effacer' }).count()) < nbAvant || nbAvant === 0, `lignes avant ${nbAvant}`);
 verifier('options : aucune exception non rattrapée', erreursOptions.length === 0, erreursOptions.join(' | '));
 verifier('options : la ligne de version affiche version_name', (await opt.locator('#versions').textContent()).includes(manifeste.version_name), await opt.locator('#versions').textContent());
 await opt.screenshot({ path: join(CAPTURES, 'erreurs-options-bas.png'), fullPage: true });

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 DE-TENTES ET CLAPOTIS LA VERONNIERE <contact@tourmentin.fr>
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // 14.50 point 3 : /mentions-legales. Produit site/publie/mentions-legales/index.html et site/mentions-legales/complet.html
-// 14.56 (13/10/2026) : l'anonymat est abandonné ; éditeur = la SARL DE-TENTES ET CLAPOTIS LA VERONNIERE ; contact : contact@tourmentin.fr (jamais l'adresse personnelle).
+// 14.56 (13/10/2026) : l'anonymat est abandonné ; éditeur = la SARL DE-TENTES ET CLAPOTIS LA VERONNIERE ; 14.75/14.77 (08/11/2026) : éditeur = la SARL DE-TENTES ET CLAPOTIS (société qui exploite le camping, Kbis) ; contact : contact@tourmentin.fr (jamais l'adresse personnelle).
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -26,7 +26,7 @@ ${pied()}
 `;
 const complet = page('Mentions légales', `<h1>Mentions légales</h1>
 <h2>Éditeur du site</h2>
-<p>DE-TENTES ET CLAPOTIS LA VERONNIERE, société à responsabilité limitée à associé unique au capital de 100 000 €, dont le siège est 1578 route des Chevaliers de l'An Mil, 38620 Montferrat, immatriculée au registre du commerce et des sociétés de Vienne sous le numéro 792 048 555.</p>
+<p>DE-TENTES ET CLAPOTIS, société à responsabilité limitée au capital de 390 000 €, dont le siège est 71 avenue de la Patinière, 38500 Voiron, immatriculée au registre du commerce et des sociétés de Vienne sous le numéro 530 960 970.</p>
 <h2>Directeur de la publication</h2>
 <p>Pierre-Hervé Geoffroy, gérant.</p>
 <h2>Contact</h2>
@@ -34,7 +34,7 @@ const complet = page('Mentions légales', `<h1>Mentions légales</h1>
 <h2>Hébergeur</h2>
 <p>OVH SAS, 2 rue Kellermann, 59100 Roubaix, France. Société par actions simplifiée au capital de 50 000 000 €, immatriculée au registre du commerce et des sociétés de Lille Métropole sous le numéro 424 761 419. Coordonnées relevées sur le site d'OVHcloud (ovhcloud.com) le 11 octobre 2026.</p>
 <h2>Données</h2>
-<p>Ce site ne dépose aucun cookie de suivi et ne charge aucune ressource d'un autre site. Ce que l'extension Tourmentin peut envoyer, et ce qu'elle n'envoie jamais, est décrit sur la page <a href="/installer/">Installer</a>.</p>`);
+<p>Ce site ne dépose aucun cookie de suivi et ne charge aucune ressource d'un autre site. Ce que l'extension Tourmentin peut envoyer, et ce qu'elle n'envoie jamais, est décrit sur la page <a href="/installer/">Installer</a> ; la politique de confidentialité complète est sur la page <a href="/confidentialite">Confidentialité</a>.</p>`);
 mkdirSync(join(ICI, 'mentions-legales'), { recursive: true });
 mkdirSync(join(ICI, 'publie', 'mentions-legales'), { recursive: true });
 writeFileSync(join(ICI, 'mentions-legales', 'complet.html'), complet);

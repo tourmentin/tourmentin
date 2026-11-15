@@ -199,6 +199,25 @@ export async function actionRole(
   }
 }
 
+/**
+ * 14.84 : « l'équipe me propose-t-elle de devenir utilisateur de confiance ? ». Appelée seulement si le réglage d'envoi le permet ET si
+ * l'usager a déjà au moins une déclaration envoyée (le service worker le vérifie). Le corps ne contient que l'action et l'horodatage ;
+ * la réponse est un oui ou un non, plus un code court de l'installation pour que la personne puisse écrire à l'équipe.
+ */
+export async function lireProposition(mode: ModeEnvoi): Promise<{ proposee: boolean; code: string | null }> {
+  if (mode === 'jamais') return { proposee: false, code: null };
+  try {
+    const r = await envoyerSigne(mode, '/actions', 'tmt-action-v1', { v: 1, action: 'proposition', horodatage: new Date().toISOString() });
+    if (r.statut === 200 && typeof r.json?.proposee === 'boolean') {
+      const etat = await lireEtat();
+      return { proposee: r.json.proposee, code: r.json.proposee && etat?.id ? etat.id.slice(0, 8) : null };
+    }
+  } catch {
+    // injoignable : pas de bouton, aucune erreur affichée
+  }
+  return { proposee: false, code: null };
+}
+
 /** Oublie la clé et la liaison de cette installation (aucune requête). Le serveur garde l'ancienne entrée. */
 export async function delierInstallation(): Promise<void> {
   await effacerCle();

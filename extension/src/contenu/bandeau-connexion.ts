@@ -81,6 +81,15 @@ export function construireContenuBandeauConnexion(racine: ShadowRoot, hoteReel: 
       zone.textContent = 'Rien à déclarer sur cette page.';
       return;
     }
+    // Réglage « Envoyer automatiquement » : le choix est déjà fait dans les options, pas de seconde validation.
+    // Le texte dit toujours la vérité sur ce qui s'est passé (envoyé, échec).
+    if (apercu.envoi?.mode === 'automatique') {
+      bonSite.hidden = true;
+      zone.textContent = 'Envoi en cours…';
+      const resultat = await actions.confirmer(true).catch((): ResultatConfirmation => ({ envoi: 'non' }));
+      zone.textContent = resultat.envoi === 'ok' ? 'Merci ! Votre déclaration a été envoyée à tourmentin.fr.' : messageResultat(resultat);
+      return;
+    }
     zone.append(
       ...construireConfirmation(apercu, (envoyer) => actions.confirmer(envoyer), (resultat) => {
         zone.replaceChildren();

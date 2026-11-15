@@ -60,6 +60,22 @@ h2{font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.15;margin:0 0 1rem;max-width
 .brumeux{background:#DCE7EB}
 .brumeux .secondaire{color:#3E5361}
 
+/* Mon histoire */
+.histoire .texte p{margin:0 0 1.1rem}
+.cas{list-style:none;padding:0;margin:1.5rem 0 1.5rem;max-width:46rem}
+.cas li{padding:1rem 0 1rem 1rem;border-left:4px solid #3FA3B3;margin:0 0 .9rem;background:rgba(255,255,255,.05)}
+.cas strong{display:block;margin-bottom:.2rem}
+.cas a{color:#9FD9E2;font-size:.88rem}
+.declencheur{font-size:clamp(1.5rem,3.4vw,2.4rem);line-height:1.2;font-weight:700;margin:2.2rem 0 1.4rem;max-width:30ch;border-left:6px solid var(--voile);padding-left:1.1rem}
+.declencheur em{font-style:normal;color:var(--voile)}
+.signature{color:#B8C6CF;font-size:.95rem;margin-top:1.4rem}
+.etapes{list-style:none;padding:0;margin:2rem 0 0;display:grid;grid-template-columns:1fr;gap:1rem;max-width:60rem;counter-reset:etape}
+@media (min-width:760px){.etapes{grid-template-columns:repeat(3,1fr)}}
+.etapes li{counter-increment:etape;background:var(--blanc);border:2px solid var(--mer);border-radius:8px;padding:1.25rem 1.4rem}
+.etapes li::before{content:counter(etape);display:inline-block;width:2rem;height:2rem;line-height:2rem;text-align:center;border-radius:50%;background:var(--voile);color:var(--mer);font-weight:700;margin-bottom:.6rem}
+.etapes h3{margin:0 0 .4rem;font-size:1.15rem}
+.etapes p{margin:0;font-size:.98rem}
+
 /* Les statuts, comme dans la fenêtre de l'extension */
 .deux-colonnes{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:start}
 @media (min-width:860px){.deux-colonnes{grid-template-columns:5fr 6fr}}
@@ -104,6 +120,7 @@ h2{font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.15;margin:0 0 1rem;max-width
 .resultat p{margin:0;font-size:.98rem}
 
 /* Ce qui reste chez vous */
+.compteur-accueil{font-size:1.15rem;margin:0 0 1rem}.compteur-accueil strong{font-size:1.6rem;color:var(--balise)}
 .faits{display:grid;grid-template-columns:1fr;gap:1.75rem 3rem;max-width:60rem;margin-top:2rem}
 @media (min-width:760px){.faits{grid-template-columns:1fr 1fr}}
 .fait h3{margin:0 0 .35rem;font-size:1.1rem}
@@ -159,6 +176,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:1.25rem}
     <div class="entete">
       <a class="marque" href="/" aria-label="Tourmentin, accueil"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#13283B" stroke="#7FD6D0" stroke-opacity=".6"/><path d="M14 6 V24" stroke="#EEF3F4" stroke-width="1.6"/><path d="M15 7 C22.5 11 25.5 17.5 24 23 H15 Z" fill="#FFFFFF"/><path d="M13 10 C9 14.5 8 19 9 22.5 H13 Z" fill="#EEF3F4" fill-opacity=".8"/><path d="M7 26 C10 24.6 12.5 27.2 16 26 S22 24.6 25 26" fill="none" stroke="#FF6B1A" stroke-width="1.6" stroke-linecap="round"/></svg>Tourmentin</a>
       <nav class="nav" aria-label="Navigation principale">
+        <a href="#histoire">Mon histoire</a>
         <a href="#fonctionnement">Fonctionnement</a>
         <a href="#confidentialite">Vos données</a>
         <a href="/installer">Installer</a>
@@ -168,15 +186,50 @@ footer nav{display:flex;flex-wrap:wrap;gap:1.25rem}
       <h1>Les faux sites copient tout.<br>Sauf l'adresse.</h1>
       <p class="chapo">Tourmentin la vérifie pour vous. Cette extension de navigateur gratuite repère les pages qui imitent les impôts, ameli, la CAF ou La Poste, au moment où vous allez saisir vos identifiants.</p>
       <div class="actions">
-        <a class="bouton" href="/installer">Installer la version d'essai</a>
-        <a class="lien-clair" href="#fonctionnement">Voir comment il réagit</a>
+        <a class="bouton" href="/installer">Installer Tourmentin</a>
+        <a class="lien-clair" href="#histoire">Pourquoi je l'ai créé</a>
       </div>
-      <p class="note-essai">Version d'essai pour Chrome, Brave et Firefox. Gratuite, libre (licence AGPL-3.0) et sans publicité.</p>
+      <p class="note-essai">Pour Chrome, Brave et Firefox. Gratuite, libre (licence AGPL-3.0) et sans publicité.</p>
     </div>
   </div>
 </header>
 
 <main>
+  <section class="sombre histoire" id="histoire">
+    <div class="contenu">
+      <h2>Pourquoi j'ai créé Tourmentin</h2>
+      <div class="texte">
+        <p>Je suis ingénieur informaticien de formation (ESSI, à Nice Sophia Antipolis). J'ai ensuite dirigé des campings et un hôtel.</p>
+        <p>Quand on dirige des entreprises, on vit avec une peur : qu'un collaborateur clique sur un faux e-mail et ouvre une faille dans le système informatique de l'entreprise. Ce n'est pas de la paranoïa : les exemples publics se succèdent.</p>
+      </div>
+      <ul class="cas">
+        <li><strong>Les impôts (DGFiP), juin et juillet 2026.</strong> Des accès illégitimes au système d'information, à partir des identifiants usurpés d'un agent et d'un tiers habilité ; des centaines de milliers de contribuables concernés. L'administration n'a pas précisé comment ces identifiants avaient été obtenus. <a href="https://www.economie.gouv.fr/actualites/acces-illegitimes-au-systeme-dinformation-de-la-direction-generale-des-finances-publiques-consulter-la-faq" rel="noopener">Source : ministère de l'Économie</a></li>
+        <li><strong>Le fichier des comptes bancaires FICOBA, début 2026.</strong> Environ 1,2 million de comptes consultés avec le compte d'un agent d'une administration tierce : pas de faille informatique, un accès légitime détourné. <a href="https://www.assemblee-nationale.fr/dyn/17/questions/QANR5L17QE13264.pdf" rel="noopener">Source : question écrite à l'Assemblée nationale</a></li>
+        <li><strong>Twitter, juillet 2020.</strong> Des employés appelés par de faux informaticiens de l'entreprise, puis envoyés vers une fausse page de connexion : les pirates ont pris la main sur des comptes très suivis. Ni virus ni faille sophistiquée, selon l'enquête du régulateur new-yorkais. <a href="https://www.dfs.ny.gov/Twitter_Report" rel="noopener">Source : rapport NYDFS</a></li>
+        <li><strong>Target, 2013.</strong> Selon les enquêtes de l'époque, tout est parti d'un e-mail d'hameçonnage reçu par un sous-traitant de climatisation, dont les identifiants ont ouvert la porte du réseau de l'enseigne. <a href="https://www.darkreading.com/cyberattacks-data-breaches/target-breach-phishing-attack-implicated" rel="noopener">Source : Dark Reading</a></li>
+      </ul>
+      <div class="texte">
+        <p>Et quand on est salarié, on n'a pas envie de faire le faux pas qui ferait de nous la cause du piratage de toute l'entreprise, ou pire, d'un service public.</p>
+      </div>
+      <p class="declencheur">Puis ma tante s'est fait pirater 10&nbsp;000&nbsp;€. <em>Ce jour-là, je me suis dit : il faut faire quelque chose.</em></p>
+      <div class="texte">
+        <p>Tourmentin est né de là : un outil collaboratif pour nous sortir, ensemble, de la tempête du piratage.</p>
+        <p class="signature">Pierre-Hervé, créateur de Tourmentin</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ensemble">
+    <div class="contenu">
+      <h2>Comment ça marche : ensemble</h2>
+      <ol class="etapes">
+        <li><h3>Vous signalez un site</h3><p>Depuis l'icône, vous signalez un site officiel ou un site frauduleux. Rien ne part sans votre confirmation.</p></li>
+        <li><h3>Les autres savent que c'est le bon</h3><p>Après le contrôle d'une personne de confiance, le site rejoint la liste signée que chaque Tourmentin télécharge : tout le monde sait quelle est la bonne adresse.</p></li>
+        <li><h3>Si un pirate le recopie, Tourmentin vous alerte</h3><p>Une page qui imite ce site sans en être l'adresse, et qui vous demande un mot de passe ou une carte bancaire, déclenche l'alerte.</p></li>
+      </ol>
+    </div>
+  </section>
+
   <section class="brumeux" id="fonctionnement">
     <div class="contenu deux-colonnes">
       <div class="texte">
@@ -223,6 +276,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:1.25rem}
   <section class="brumeux" id="base">
     <div class="contenu">
       <h2>Une liste de sites qui s'enrichit avec vous</h2>
+      <p class="compteur-accueil" id="compteur-accueil" hidden><strong id="nb-sites">…</strong> sites déjà vérifiés ou répertoriés grâce à la communauté. <a href="/chiffres/">Voir les chiffres</a> · <a href="/proteger-mes-proches/">Protéger mes proches</a> · <a href="/verifier-un-lien/">Vérifier un lien reçu</a></p>
       <div class="faits">
         <div class="fait">
           <h3>Les sites vérifiés</h3>
@@ -303,7 +357,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:1.25rem}
         <li><strong>Son silence ne prouve rien.</strong><span class="secondaire">Une page sur laquelle il ne dit rien n'est pas garantie sûre. Gardez le réflexe de vérifier l'adresse.</span></li>
         <li><strong>« Vérifié » parle de l'adresse, pas de la page.</strong><span class="secondaire">Il signifie que l'adresse est bien celle du service, contrôlée à la main. Il ne garantit pas que la page n'a pas été piratée.</span></li>
         <li><strong>Il ne remplace ni votre antivirus ni la protection du navigateur.</strong><span class="secondaire">Il couvre un moment précis : les premières heures d'un faux site, avant qu'il soit signalé ailleurs.</span></li>
-        <li><strong>C'est une version d'essai.</strong><span class="secondaire">Sa capacité à repérer les faux sites n'a pas encore été mesurée sur un grand nombre de cas réels. Vos retours servent à ça.</span></li>
+        <li><strong>Son efficacité n'est pas encore mesurée.</strong><span class="secondaire">Sa capacité à repérer les faux sites n'a pas encore été mesurée sur un grand nombre de cas réels. Vos retours servent à ça.</span></li>
       </ul>
     </div>
   </section>
@@ -327,16 +381,27 @@ footer nav{display:flex;flex-wrap:wrap;gap:1.25rem}
 
 <footer>
   <div class="contenu">
-    <p>Tourmentin, version d'essai. Gratuit, libre (licence AGPL-3.0), sans publicité. Hébergé en France par OVH. Contact : <span class="courriel" data-u="contact" data-d1="tourmentin" data-d2="fr">contact arobase tourmentin point fr</span></p>
+    <p>Tourmentin. Gratuit, libre (licence AGPL-3.0), sans publicité. Hébergé en France par OVH. Contact : <span class="courriel" data-u="contact" data-d1="tourmentin" data-d2="fr">contact arobase tourmentin point fr</span></p>
     <nav aria-label="Liens de pied de page">
       <a href="/installer">Installer</a>
+      <a href="/chiffres/">Les chiffres</a>
       <a href="/gestion">Espace contributeurs</a>
+      <a href="/confidentialite">Confidentialité</a>
       <a href="/mentions-legales">Mentions légales</a>
     </nav>
   </div>
 </footer>
 
 <script>document.querySelectorAll('.courriel').forEach(function(e){var a=e.dataset.u+'@'+e.dataset.d1+'.'+e.dataset.d2,l=document.createElement('a');l.href='mailto:'+a;l.textContent=a;e.replaceChildren(l)})</script>
+<script>
+// Compteur commun : un seul GET sans paramètre vers tourmentin.fr (même site), rien n'est envoyé ; sans réponse, la ligne reste cachée.
+(function(){
+  var p = document.getElementById('compteur-accueil'); if(!p || !window.fetch) return;
+  fetch('/api/v1/stats', {credentials:'omit', cache:'no-store'}).then(function(r){return r.ok ? r.json() : null;}).then(function(d){
+    if(d && typeof d.sites_verifies === 'number' && d.sites_verifies > 0){ document.getElementById('nb-sites').textContent = d.sites_verifies.toLocaleString('fr-FR'); p.hidden = false; }
+  }).catch(function(){});
+})();
+</script>
 <script>
 
 // Lecteur d'adresse : approximation volontairement simple du « domaine enregistrable ».

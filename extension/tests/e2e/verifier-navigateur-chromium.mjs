@@ -110,7 +110,7 @@ verifier('imitation : alerte N2 dans la popup ET bandeau N2 dans la page (script
 const opt = await context.newPage();
 await opt.goto(`chrome-extension://${id}/src/options/options.html`);
 await opt.waitForTimeout(1500);
-verifier('compatibilité : Ed25519 à clé non exportable en IndexedDB fonctionne', (await opt.locator('#compat-ed25519').getAttribute('data-ok')) === 'true', await opt.locator('#compat-ed25519').textContent());
+verifier('compatibilité : Ed25519 à clé non exportable en IndexedDB fonctionne', !(await opt.locator('#compat-alerte').isVisible()), await opt.locator('#compat-alerte').textContent());
 await opt.locator('input[name="mode-envoi"][value="jamais"]').check();
 await opt.waitForFunction(() => document.getElementById('enregistre-mode-envoi')?.textContent === 'Enregistré', null, { timeout: 3000 }).catch(() => {});
 verifier('réglage : « Enregistré » affiché', (await opt.locator('#enregistre-mode-envoi').textContent()) === 'Enregistré');

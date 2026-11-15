@@ -53,7 +53,7 @@ describe('doitAfficherBandeauConnexion — 14.22 B', () => {
   });
 
   it('jamais sur une page hors périmètre, en exclusion personnelle, ou déjà signalée par l\'usager', () => {
-    for (const code of ['hors-perimetre', 'exclusion-personnelle', 'declare-en-attente'] as const) {
+    for (const code of ['hors-perimetre', 'reseau-local', 'exclusion-personnelle', 'declare-en-attente'] as const) {
       expect(doitAfficherBandeauConnexion(statut({ code }), 'chaque-visite', false)).toBe(false);
     }
   });

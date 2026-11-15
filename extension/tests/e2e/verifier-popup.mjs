@@ -140,7 +140,7 @@ async function cas(context, sw, url, attenduCode, attenduTexte, capture, { offic
 
   const fermer = async (r) => { if (r) { await r.popup.connexionCdp.close().catch(() => {}); await r.page.close().catch(() => {}); } };
 
-  await fermer(await cas(context, sw, 'http://localhost/', 'hors-perimetre', 'Tourmentin ne s\'applique pas à cette page', '1-hors-perimetre.png', { officiel: false, frauduleuse: false }));
+  await fermer(await cas(context, sw, 'http://localhost/', 'reseau-local', "Adresse de votre réseau local. Elle n'est donc pas analysée.", '1-reseau-local.png', { officiel: false, frauduleuse: false }));
   await fermer(await cas(context, sw, 'chrome://version/', 'hors-perimetre', "Tourmentin ne s'applique pas à cette page", '1b-page-interne.png', { officiel: false, frauduleuse: false }));
   await fermer(await cas(context, sw, 'https://impots.gouv.fr/', 'officiel-verifie', 'Site officiel vérifié : Impôts / DGFiP', '4-officiel-verifie.png', { officiel: false, frauduleuse: true }));
   await fermer(await cas(context, sw, 'https://impots-gouv.fr/connexion', 'n2-imitation', 'Imitation probable de Impôts / DGFiP : ne saisissez rien', '5-n2.png', { officiel: true, frauduleuse: true }));

@@ -5,7 +5,6 @@
 // export manuel en JSON lisible (14.11 rang 2, export.ts).
 import type { MessageDepuisArrierePlan, MessageDepuisContenu } from '../messages.js';
 import type { EntreeJournal } from '../arriere-plan/journal.js';
-import type { EntreeSignalement } from '../arriere-plan/signalements.js';
 import { construireExport, nomFichierExport, type TypeExport } from '../arriere-plan/export.js';
 import { versionSocle } from '../listes/chargement.js';
 import { lireEtatPublication } from '../arriere-plan/publication.js';
@@ -16,7 +15,6 @@ import { BUILD_DE_MESURE } from '../version-essai.js';
 
 import { demander, texteErreur, verifierService } from '../ui/service-worker.js';
 import { verifierEd25519 } from '../ui/compatibilite.js';
-import { NOM_ALARME } from '../arriere-plan/publication.js';
 
 // 14.43 : alerte unique en tête de page quand le service interne ne répond pas ou n'est pas de la même construction.
 const alerteService = document.getElementById('alerte-service')!;
@@ -100,8 +98,6 @@ const champCode = document.getElementById('code-liaison') as HTMLInputElement;
 const resultatLiaison = document.getElementById('resultat-liaison')!;
 const boutonEffacerJournal = document.getElementById('effacer-journal') as HTMLButtonElement;
 const corpsTableJournal = document.querySelector('#table-journal tbody')!;
-const corpsTableSignalements = document.querySelector('#table-signalements tbody')!;
-const compteurSignalements = document.getElementById('compteur-signalements')!;
 
 function ligneVide(colonnes: number): HTMLTableRowElement {
   const tr = document.createElement('tr');
@@ -195,9 +191,18 @@ async function chargerJournal(): Promise<void> {
   for (const entree of [...reponse.entrees].reverse()) corpsTableJournal.append(ligneJournal(entree));
 }
 
+/** Libellés lisibles des niveaux, dans les mots de la page d'accueil (affichage seulement : les données et l'export gardent N0 à N3). */
+const LIBELLES_NIVEAU: Record<string, string> = {
+  N0: 'Site non répertorié par Tourmentin',
+  N1: 'Site inconnu : prudence avant de saisir vos informations',
+  N2: 'Imitation probable : ne saisissez rien',
+  N3: 'Imitation quasi certaine : quittez la page',
+};
+const niveauLisible = (niveau: string): string => LIBELLES_NIVEAU[niveau] ?? niveau;
+
 function ligneJournal(entree: EntreeJournal): HTMLTableRowElement {
   const tr = document.createElement('tr');
-  for (const valeur of [entree.horodatage, adresseLisible(entree), entree.niveau, entree.motif]) {
+  for (const valeur of [entree.horodatage, adresseLisible(entree), niveauLisible(entree.niveau), entree.motif]) {
     const td = document.createElement('td');
     td.textContent = valeur;
     tr.append(td);
@@ -210,61 +215,15 @@ boutonEffacerJournal.addEventListener('click', async () => {
   await chargerJournal();
 });
 
-async function chargerSignalements(): Promise<void> {
-  const reponse = await charger({ type: 'LIRE_SIGNALEMENTS' }, 'SIGNALEMENTS');
-  if (!reponse) return;
-  compteurSignalements.textContent = `${reponse.entrees.length} signalement(s).`;
-  corpsTableSignalements.replaceChildren();
-  if (reponse.entrees.length === 0) { corpsTableSignalements.append(ligneVide(5)); return; }
-  for (const entree of [...reponse.entrees].reverse()) corpsTableSignalements.append(ligneSignalement(entree));
-}
-
-function ligneSignalement(entree: EntreeSignalement): HTMLTableRowElement {
-  const tr = document.createElement('tr');
-  for (const valeur of [entree.horodatage, adresseLisible(entree), entree.niveau, entree.motif]) {
-    const td = document.createElement('td');
-    td.textContent = valeur;
-    tr.append(td);
-  }
-  const tdBouton = document.createElement('td');
-  const bouton = document.createElement('button');
-  bouton.textContent = 'Effacer';
-  bouton.addEventListener('click', async () => {
-    await lancer({ type: 'EFFACER_SIGNALEMENT', horodatage: entree.horodatage });
-    await chargerSignalements();
-  });
-  tdBouton.append(bouton);
-  tr.append(tdBouton);
-  return tr;
-}
-
 void chargerReglages();
 void chargerJournal();
-void chargerSignalements();
+void afficherCompteurs();
 
 // 14.11 rang 2 : export manuel. Geste délibéré du testeur (14.1) : le fichier
 // est produit ici, localement, par un lien de téléchargement — aucune requête,
 // aucune permission supplémentaire (`downloads` non requise).
 // 14.39 point 4 : texte du premier lancement sur le téléchargement des listes, seulement dans un build qui télécharge.
 document.getElementById('information-listes-premier-lancement')!.hidden = URL_PUBLICATION === '';
-
-// 14.48 : compatibilité de ce navigateur (aucune requête) : navigateur, signature Ed25519 à clé non exportable, alarme des listes.
-void (async () => {
-  document.getElementById('compat-navigateur')!.textContent = navigator.userAgent.replace(/^Mozilla\/5\.0 /, '');
-  const ed = await verifierEd25519();
-  const cibleEd = document.getElementById('compat-ed25519')!;
-  cibleEd.textContent = ed.texte;
-  cibleEd.dataset.ok = String(ed.ok);
-  if (ed.detail) cibleEd.title = ed.detail;
-  if (ed.detail && !ed.ok) cibleEd.append(` (${ed.detail})`);
-  const cibleAlarme = document.getElementById('compat-alarme')!;
-  try {
-    const alarmes = await chrome.alarms.getAll();
-    cibleAlarme.textContent = URL_PUBLICATION === '' ? 'sans objet (cette version ne télécharge aucune liste)' : alarmes.some((a) => a.name === NOM_ALARME) ? 'planifiée (toutes les heures)' : 'absente';
-  } catch {
-    cibleAlarme.textContent = 'indisponible dans ce navigateur';
-  }
-})();
 
 // 14.33 F : état des listes signées, lu sur cet ordinateur (aucune requête depuis cette page).
 const LIBELLE_REJET: Record<string, string> = {
@@ -290,12 +249,12 @@ void (async () => {
   cible.textContent = `${ligne('officiels')}. ${ligne('frauduleux')}.`;
 })();
 
-// 14.19 E : `version_name` (« essai P · spec X.YY · hash ») identifie la construction, `version` seule ne le ferait pas.
+// 14.19 E : `version_name` (« spec X.YY · hash ») identifie la construction, `version` seule ne le ferait pas.
 const manifeste = chrome.runtime.getManifest();
 const versions = { extension: manifeste.version, socle: versionSocle() };
 document.getElementById('versions')!.textContent = `Tourmentin ${manifeste.version} (${manifeste.version_name ?? 'construction inconnue'}) — socle ${versions.socle}`;
 
-async function telecharger(type: TypeExport, entrees: EntreeJournal[] | EntreeSignalement[]): Promise<void> {
+async function telecharger(type: TypeExport, entrees: EntreeJournal[]): Promise<void> {
   const maintenant = new Date();
   const bandeaux = ((await chrome.storage.local.get('bandeauxParJour')).bandeauxParJour ?? {}) as Record<string, number>;
   const blob = new Blob([construireExport(type, entrees, versions, maintenant, bandeaux)], { type: 'application/json' });
@@ -314,7 +273,50 @@ document.getElementById('exporter-journal')!.addEventListener('click', async () 
   if (reponse) await telecharger('journal', reponse.entrees);
 });
 
-document.getElementById('exporter-signalements')!.addEventListener('click', async () => {
-  const reponse = await charger({ type: 'LIRE_SIGNALEMENTS' }, 'SIGNALEMENTS');
-  if (reponse) await telecharger('signalements', reponse.entrees);
+
+// 14.84 : compteurs et partage. Aucune requête ici, sauf la question « proposition ? » faite par le service worker (réglage d'envoi permettant, au moins une déclaration envoyée).
+const URL_PARTAGE = 'https://tourmentin.fr/';
+async function afficherCompteurs(): Promise<void> {
+  const commun = document.getElementById('compteur-commun')!;
+  if (URL_PUBLICATION === '') {
+    commun.textContent = 'Cette version ne télécharge aucune liste : pas de compteur.';
+  } else {
+    const etat = await lireEtatPublication();
+    const nb = etat.officiels ? new Set(etat.officiels.entrees.map((e) => e.hote)).size : 0;
+    commun.textContent = nb > 0 ? `Grâce à la communauté, ${nb} sites sont déjà vérifiés et protègent tous les utilisateurs de Tourmentin.` : "La liste des sites vérifiés n'est pas encore arrivée sur cet ordinateur.";
+  }
+  const c = await charger({ type: 'LIRE_CONTRIBUTION' }, 'CONTRIBUTION');
+  const cible = document.getElementById('compteur-declarations')!;
+  if (!c) return;
+  cible.textContent = c.declarees === 0
+    ? "Vous n'avez encore déclaré aucun site comme étant fiable. Sur la page d'un site que vous connaissez bien, ouvrez Tourmentin et choisissez « Signaler comme site officiel »."
+    : `Vous avez déclaré ${c.declarees} site${c.declarees > 1 ? 's' : ''} comme étant fiable${c.declarees > 1 ? 's' : ''} (${c.envoyees} envoyé${c.envoyees > 1 ? 's' : ''} à tourmentin.fr). Continuez, avec soin : une seule erreur et l'équipe ne vous proposera pas le compte.`;
+  const bloc = document.getElementById('bloc-confiance')!;
+  bloc.hidden = !c.proposee;
+  if (c.proposee) {
+    const sujet = encodeURIComponent('Utilisateur de confiance Tourmentin');
+    const corps = encodeURIComponent(`Bonjour, j'accepte votre proposition de devenir utilisateur de confiance. Mon code : ${c.code ?? ''}`);
+    (document.getElementById('bouton-confiance') as HTMLAnchorElement).href = `mailto:contact@tourmentin.fr?subject=${sujet}&body=${corps}`;
+  }
+}
+
+const boutonPartager = document.getElementById('partager') as HTMLButtonElement;
+const resultatPartage = document.getElementById('resultat-partage')!;
+boutonPartager.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(URL_PARTAGE);
+    resultatPartage.textContent = 'Lien copié : collez-le dans un message.';
+  } catch {
+    resultatPartage.textContent = `Copie impossible ici. Le lien : ${URL_PARTAGE}`;
+  }
+});
+(document.getElementById('partager-courriel') as HTMLAnchorElement).href =
+  `mailto:?subject=${encodeURIComponent('Un outil gratuit contre les faux sites')}&body=${encodeURIComponent(`Bonjour, j'utilise Tourmentin, une extension gratuite qui prévient quand une page imite un site officiel (impôts, banque, Ameli…). Pour protéger les proches, je te conseille de l'installer : ${URL_PARTAGE}`)}`;
+
+// Un navigateur qui ne sait pas signer (Ed25519) empêche toute déclaration : on le dit en haut de la section, sinon on n'affiche rien.
+void verifierEd25519().then((ed) => {
+  if (ed.ok) return;
+  const alerte = document.getElementById('compat-alerte')!;
+  alerte.textContent = `Ce navigateur ne permet pas à Tourmentin de signer ses envois (${ed.texte}) : les déclarations à tourmentin.fr ne fonctionneront pas.`;
+  alerte.hidden = false;
 });

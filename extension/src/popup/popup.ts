@@ -102,7 +102,7 @@ async function afficherRoles(statut: StatutAffiche): Promise<void> {
     reponse = undefined; // sans réponse du service worker : aucun bouton de rôle (le problème est dit par verifierService)
   }
   if (!reponse || (reponse.role !== 'confiance' && reponse.role !== 'super')) return;
-  const horsPerimetre = statut.code === 'hors-perimetre';
+  const horsPerimetre = statut.code === 'hors-perimetre' || statut.code === 'reseau-local';
   boutonValider.style.display = !horsPerimetre && !statut.pagePaiement && statut.code !== 'officiel-verifie' ? 'block' : 'none';
   boutonConfirmerFrauduleux.style.display = horsPerimetre ? 'none' : 'block';
   boutonGestion.style.display = 'block';

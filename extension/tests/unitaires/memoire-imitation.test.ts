@@ -132,6 +132,18 @@ describe('imitationARetenir', () => {
     const e = ecran1();
     expect(imitationARetenir(e, analyser(e, listes({ communautaireValidee: [HOTE] }), cfg), listes({ communautaireValidee: [HOTE] }))).toBeNull();
   });
+  it("ne retient rien sans adresse, ni quand le verdict n'a pas de score d'exposition (arrêt avant le calcul)", () => {
+    const e = ecran1();
+    const v = analyser(e, listes(), cfg);
+    const sansUrl = { ...e, url: undefined } as unknown as EntreeAnalyse;
+    expect(imitationARetenir(sansUrl, v, listes())).toBeNull();
+    const sansExposition = { ...v, scoreExposition: undefined };
+    expect(imitationARetenir(e, sansExposition, listes())).toBeNull();
+    expect(imitationARetenir(e, { ...v, signaleParListe: true }, listes())).toBeNull();
+    expect(imitationARetenir(e, { ...v, scoreImitation: undefined }, listes())).toBeNull();
+    const sansSignaux = imitationARetenir(e, { ...v, signauxImitation: undefined }, listes());
+    expect(sansSignaux?.familles).toEqual([]);
+  });
   it('ne retient rien sur un hôte signalé par liste, ni hors périmètre', () => {
     const e = ecran1();
     expect(imitationARetenir(e, analyser(e, listes({ revocation: [HOTE] }), cfg), listes({ revocation: [HOTE] }))).toBeNull();
@@ -181,6 +193,11 @@ describe('analyser avec imitation retenue (connexion en deux étapes)', () => {
   it('un paiement (E8) sur la page suivante utilise aussi la mémoire', () => {
     const paiement = ecran2([creerChamp({ type: 'text', libelle: 'Numéro de carte' })]);
     expect(analyser(paiement, listes(), cfg, { imitationRetenue: retenueForte }).niveau).toBe('N2');
+  });
+  it("une mémoire faible (sous le seuil de 45), appliquée à la main, est signalée dans le verdict sans créer d'alerte (N0)", () => {
+    const v = analyser(ecran2(), listes(), cfg, { imitationRetenue: { marque: 'impots-gouv', scoreImitation: 20, familles: ['domaine'] } });
+    expect(v.niveau).toBe('N0');
+    expect(v.imitationRetenueUtilisee).toBeDefined();
   });
   it('max(I page, I retenu) : une mémoire plus faible que la page ne change rien', () => {
     const page = ecran1([creerChamp({ type: 'password' })]);

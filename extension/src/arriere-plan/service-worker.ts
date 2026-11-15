@@ -45,7 +45,7 @@ import {
 import { BUILD_DE_MESURE } from '../version-essai.js';
 import { BUILD_ID } from '../version-build.js';
 import { MODE_ENVOI_PAR_DEFAUT, estModeEnvoi, type ModeEnvoi } from './reseau.js';
-import { actionRole, delierInstallation, envoyerDeclaration, etatLiaison, lierCompte, lireRole } from './envoi.js';
+import { actionRole, delierInstallation, envoyerDeclaration, etatLiaison, lierCompte, lireProposition, lireRole } from './envoi.js';
 import { construireRapport, type RapportDeclaration } from './rapport.js';
 
 // 14.6 point e : l'écran de premier lancement s'affiche une fois, à
@@ -481,6 +481,20 @@ function traiterMessage(message: MessageDepuisContenu, sender: chrome.runtime.Me
 
   if (message.type === 'LIRE_LIAISON') {
     void etatLiaison().then((r) => sendResponse({ type: 'LIAISON_ETAT', lie: r.lie, role: r.role } satisfies MessageDepuisArrierePlan)).catch(() => sendResponse({ type: 'ERREUR_SW', raison: 'exception' } satisfies MessageDepuisArrierePlan));
+    return true;
+  }
+
+  // 14.84 : « Vous avez déclaré N sites » vient de la liste locale ; l'appel au serveur n'a lieu que si au moins une déclaration « officiel » a été envoyée.
+  if (message.type === 'LIRE_CONTRIBUTION') {
+    void (async () => {
+      const stocke = await chrome.storage.local.get('signalements');
+      const officiels = ((stocke.signalements as EntreeSignalement[] | undefined) ?? []).filter((e) => (e.type ?? 'frauduleuse') === 'officiel');
+      const envoyees = new Set(officiels.filter((e) => e.envoi === 'ok').map((e) => e.hote)).size;
+      const declarees = new Set(officiels.map((e) => e.hote)).size;
+      const { modeEnvoi } = await lireReglages();
+      const p = envoyees > 0 ? await lireProposition(modeEnvoi) : { proposee: false, code: null };
+      sendResponse({ type: 'CONTRIBUTION', declarees, envoyees, proposee: p.proposee, code: p.code } satisfies MessageDepuisArrierePlan);
+    })().catch(() => sendResponse({ type: 'CONTRIBUTION', declarees: 0, envoyees: 0, proposee: false, code: null } satisfies MessageDepuisArrierePlan));
     return true;
   }
 

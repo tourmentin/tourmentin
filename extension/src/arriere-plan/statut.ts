@@ -11,15 +11,19 @@
 // table de Ph ; il est placé (libellés acceptés le 30/09) entre le domaine
 // frauduleux et « officiel vérifié », pour qu'aucun « vérifié » ne s'affiche
 // au-dessus d'une alerte N3.
-import { estHorsPerimetre } from '../moteur/analyser.js';
+import { estHorsPerimetre, estReseauLocal } from '../moteur/analyser.js';
 import { appartientAuxDomaines } from '../moteur/domaine.js';
 import type { Listes, SignalDeclenche, Verdict } from '../moteur/types.js';
 import type { ModeEnvoi } from './reseau.js';
 import { typeDeclaration, type EntreeSignalement, type TypeDeclaration } from './signalements.js';
 import { TEXTE_JAMAIS_TRANSMIS } from '../ui/confirmation.js';
 
+/** 14.67 : texte du statut gris des adresses du réseau local (routeur, imprimante, intranet). */
+export const TEXTE_RESEAU_LOCAL = 'Adresse de votre réseau local. Elle n\'est donc pas analysée.';
+
 export type CodeStatut =
   | 'hors-perimetre'
+  | 'reseau-local'
   | 'exclusion-personnelle'
   | 'frauduleux-liste'
   | 'secret-reconnu'
@@ -100,7 +104,7 @@ export function determinerStatut(
     texte,
     couleur,
     peutSignalerOfficiel: peutSignalerOfficiel && !paiement && !dejaDeclare.includes('officiel'),
-    peutDeclarerFrauduleuse: code !== 'hors-perimetre' && !dejaDeclare.includes('frauduleuse'),
+    peutDeclarerFrauduleuse: code !== 'hors-perimetre' && code !== 'reseau-local' && !dejaDeclare.includes('frauduleuse'),
     dejaDeclare,
     champMotDePasse: motDePasse,
     pagePaiement: paiement,
@@ -112,6 +116,8 @@ export function determinerStatut(
   if (listes.revocation.includes(cible.domaineEnregistrable) || (listes.hotesFrauduleux ?? []).includes(cible.hote)) {
     return construire('frauduleux-liste', 'Site frauduleux signalé : quittez cette page', 'rouge', false);
   }
+  // 1 bis. Z4, adresse du réseau local (14.67) : même rang que le statut 1, texte propre
+  if (estReseauLocal(cible)) return construire('reseau-local', TEXTE_RESEAU_LOCAL, 'gris', false);
   // 1. Z4
   if (estHorsPerimetre(cible)) return construire('hors-perimetre', 'Tourmentin ne s\'applique pas à cette page', 'gris', false);
   // 2. Z3
@@ -219,9 +225,10 @@ export function statutSansVerdict(adresse: string | undefined): StatutAffiche | 
     }
   }
   if (cible && !boutique && !estHorsPerimetre(cible)) return null;
+  const local = cible !== null && !boutique && estReseauLocal(cible);
   return {
-    code: 'hors-perimetre',
-    texte: 'Tourmentin ne s\'applique pas à cette page',
+    code: local ? 'reseau-local' : 'hors-perimetre',
+    texte: local ? TEXTE_RESEAU_LOCAL : 'Tourmentin ne s\'applique pas à cette page',
     couleur: 'gris',
     peutSignalerOfficiel: false,
     peutDeclarerFrauduleuse: false,

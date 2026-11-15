@@ -5,6 +5,7 @@
 // (all_frames, 6.5), monde ISOLATED exclusivement (règle 6 de CLAUDE.md —
 // c'est le monde par défaut d'un content script, jamais changé ici).
 import { construireEntreeAnalyse } from '../adaptateurs/dom.js';
+import { racinesProfondes } from '../adaptateurs/shadow.js';
 import { collecterAdressesImages } from '../adaptateurs/images.js';
 import type { MessageDepuisArrierePlan, MessageDepuisContenu } from '../messages.js';
 import { chargerSocle } from '../listes/chargement.js';
@@ -13,6 +14,7 @@ import { afficherBandeauConnexion, retirerBandeauConnexion } from './bandeau-con
 import { afficherBandeauFrauduleux, retirerBandeauFrauduleux } from './bandeau-frauduleux.js';
 import { fermetureResteValable, memoriserFermeture, type VerdictFerme } from './fermeture.js';
 import type { Verdict } from '../moteur/types.js';
+import { estReseauLocal } from '../moteur/analyser.js';
 
 // 14.11 (rang 1) : le socle est une donnée statique embarquée (pas d'API
 // chrome.*), chargée ici pour résoudre l'id de marque du verdict vers son
@@ -57,7 +59,16 @@ let connexionFermee = false;
 /** 14.37 point 4 : le bandeau rouge fermé ne revient pas sur cette page ; une autre visite le réaffiche. */
 let frauduleuxFerme = false;
 
+/**
+ * 14.67 : une adresse du réseau local (routeur, imprimante, intranet) n\'est jamais analysée : le script ne lit même pas la page, n\'envoie rien au
+ * service worker, n\'affiche aucun bandeau. Les adresses IP publiques et les fichiers ouverts depuis le disque restent analysés.
+ */
+function pageReseauLocal(): boolean {
+  return estReseauLocal({ schema: document.location.protocol.replace(':', '').toLowerCase(), hote: document.location.hostname.toLowerCase() });
+}
+
 function envoyerAnalyse(origine: OrigineAnalyse): void {
+  if (pageReseauLocal()) return;
   origineEnCours = origine;
   const entree = construireEntreeAnalyse(document);
   derniereUrlHote = entree.url?.hote;
@@ -70,14 +81,39 @@ function envoyerAnalyse(origine: OrigineAnalyse): void {
 
 function planifierNouvelleAnalyse(): void {
   if (minuteurDebounce !== undefined) clearTimeout(minuteurDebounce);
-  minuteurDebounce = setTimeout(() => envoyerAnalyse('mutation'), DEBOUNCE_MUTATION_MS);
+  minuteurDebounce = setTimeout(() => {
+    envoyerAnalyse('mutation');
+    observerNouvellesRacines();
+  }, DEBOUNCE_MUTATION_MS);
 }
+
+// 14.73 : un MutationObserver posé sur le document ne voit PAS l'intérieur des shadow roots. Chaque racine rencontrée reçoit donc le sien
+// (le même observateur), et un nouveau passage est demandé quand une racine apparaît. Mesuré avant correction : un formulaire ajouté après
+// coup dans un shadow root n'était jamais analysé (verifier-page-js.mjs).
+const OPTIONS_OBSERVATION: MutationObserverInit = { childList: true, subtree: true, characterData: true };
+const racinesObservees = new WeakSet<Node>();
+let observateur: MutationObserver | undefined;
+
+function observerNouvellesRacines(): void {
+  if (!observateur) return;
+  let nouvelle = false;
+  for (const racine of racinesProfondes(document)) {
+    if (racine === document || racinesObservees.has(racine)) continue;
+    racinesObservees.add(racine);
+    observateur.observe(racine, OPTIONS_OBSERVATION);
+    nouvelle = true;
+  }
+  if (nouvelle) planifierNouvelleAnalyse();
+}
+
+/** Racines attachées sans aucune mutation visible du document (attachShadow sur un élément déjà présent) : quelques passages de contrôle au début de la vie de la page, puis plus rien. */
+const DELAIS_CONTROLE_RACINES_MS = [1000, 2500, 6000, 15000, 40000];
 
 chrome.runtime.onMessage.addListener((message: MessageDepuisArrierePlan, _expediteur, repondre) => {
   // 14.19 B : de quoi nourrir une déclaration — le texte visible (qui vient de construireEntreeAnalyse : jamais une valeur de champ)
   // et les adresses d'images. Seule la frame principale répond.
   if (message.type === 'COLLECTER_RAPPORT') {
-    if (window.self !== window.top) return;
+    if (window.self !== window.top || pageReseauLocal()) return;
     const reponse: MessageDepuisArrierePlan = {
       type: 'RAPPORT_PAGE',
       textes: construireEntreeAnalyse(document).texteVisible,
@@ -160,19 +196,19 @@ chrome.runtime.onMessage.addListener((message: MessageDepuisArrierePlan, _expedi
 });
 
 function demarrer(): void {
+  if (pageReseauLocal()) return; // 14.67 : ni analyse, ni observateur de mutations
   envoyerAnalyse('initiale');
 
   // SPA sans mise à jour de l'historique (6.5) : secours du
   // webNavigation.onHistoryStateUpdated du service worker. Un seul
   // observateur sur <html> couvre à la fois document.title (dans <head>) et
   // document.body, avec le debounce de 300 ms demandé.
-  new MutationObserver((mutations) => {
+  observateur = new MutationObserver((mutations) => {
     if (!mutationsInternes(mutations)) planifierNouvelleAnalyse();
-  }).observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-    characterData: true,
   });
+  observateur.observe(document.documentElement, OPTIONS_OBSERVATION);
+  observerNouvellesRacines();
+  for (const delai of DELAIS_CONTROLE_RACINES_MS) setTimeout(observerNouvellesRacines, delai);
 }
 
 if (document.readyState === 'loading') {

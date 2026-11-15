@@ -280,12 +280,6 @@ verifier("build d'essai : aucune annonce « Build de mesure » sur la page d'opt
   !(await options.locator('#annonce-mesure').isVisible()));
 const badgeEssai = await context.serviceWorkers()[0].evaluate(() => chrome.action.getBadgeText({}));
 verifier("build d'essai : aucune marque « M » sur le badge global", badgeEssai === '', JSON.stringify(badgeEssai));
-const [dlSignalements] = await Promise.all([
-  options.waitForEvent('download', { timeout: 8000 }).catch(() => null),
-  options.click('#exporter-signalements'),
-]);
-verifier('l\'export des signalements télécharge un fichier (liste vide acceptée)', !!dlSignalements);
-
 await context.close();
 
 // --- 5. le build de mesure s'annonce (14.15 point 1) ----------------------------

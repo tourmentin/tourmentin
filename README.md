@@ -4,7 +4,7 @@ Tourmentin est une extension de navigateur (Chrome, Brave, Firefox) qui repère 
 
 L'analyse se fait sur votre appareil. Rien de ce que vous consultez n'est envoyé sans que vous le décidiez, et ce que vous saisissez dans un formulaire ne quitte jamais votre appareil.
 
-**Version d'essai** : le silence de Tourmentin ne prouve pas qu'une page est sûre.
+**Le silence de Tourmentin ne prouve pas qu'une page est sûre.**
 
 ## Installer
 

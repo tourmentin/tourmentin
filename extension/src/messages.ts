@@ -36,6 +36,8 @@ export type MessageDepuisContenu =
   | { type: 'LIER_COMPTE'; code: string }
   | { type: 'DELIER_COMPTE' }
   | { type: 'LIRE_LIAISON' }
+  /** 14.84 : compteurs locaux (déclarations) et, si l'équipe l'a proposé, le bouton « utilisateur de confiance ». */
+  | { type: 'LIRE_CONTRIBUTION' }
   /** 14.20 G : actions de rôle ; le serveur revérifie le rôle à chaque action. */
   | { type: 'ACTION_ROLE'; action: ActionRole; ongletUrl?: string }
   /** « Voir les sites de la base » : ouvre l'adresse fixe du back-office, sans aucun paramètre venu de la page (C6). */
@@ -66,6 +68,7 @@ export type MessageDepuisArrierePlan =
   | { type: 'ROLE'; lie: boolean; role: Role | null }
   | { type: 'LIAISON'; ok: boolean; role?: Role; erreur?: string }
   | { type: 'LIAISON_ETAT'; lie: boolean; role: Role | null }
+  | { type: 'CONTRIBUTION'; declarees: number; envoyees: number; proposee: boolean; code: string | null }
   | { type: 'ACTION'; ok: boolean; erreur?: string }
   | { type: 'RAPPORT_PAGE'; textes: string; images: string[] }
   /** 14.43 : version de construction du service worker en cours d'exécution. */

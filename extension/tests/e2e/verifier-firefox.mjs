@@ -152,11 +152,8 @@ try {
   verifier('le texte de Ph sur le téléchargement horaire est affiché', /Tourmentin télécharge chaque heure la liste des sites vérifiés/.test(await driver.findElement(By.id('information-listes')).getText()));
 
   // 3. compatibilité : Ed25519 à clé non exportable en IndexedDB, alarme horaire
-  const ed = await driver.findElement(By.id('compat-ed25519'));
-  verifier('Ed25519 sous Firefox : signature et vérification valides, clé privée NON exportable, rangée en IndexedDB', (await ed.getAttribute('data-ok')) === 'true', await ed.getText());
-  const alarme = await driver.findElement(By.id('compat-alarme')).getText();
-  verifier('alarme horaire des listes en place', /planifiée \(toutes les heures\)/.test(alarme), alarme);
-  console.log('INFO  navigateur : ' + (await driver.findElement(By.id('compat-navigateur')).getText()).slice(0, 120));
+  const alerteCompat = await driver.findElement(By.id('compat-alerte'));
+  verifier('Ed25519 sous Firefox : aucune alerte de compatibilité (signature et vérification valides)', !(await alerteCompat.isDisplayed()), await alerteCompat.getText());
 
   // 4. pages visitées : script de contenu, bandeaux, statuts par la page popup ouverte dans un onglet
   // un motif de correspondance n'a pas de port : « http://hôte/* » couvre tous les ports

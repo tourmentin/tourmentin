@@ -30,7 +30,9 @@ const EXCLUSIONS = [
   ...(AVEC_CORPUS ? [] : [['corpus/', 'données (sites légitimes, relevés) dont la licence n\'est pas décidée (14.54) ; --avec-corpus pour les inclure']]),
   ['captures-', 'captures d\'écran de contrôle'],
   ['docs/', 'la spécification et tous les documents de travail internes (relevés, mesures, rapports) : la spec n\'est pas publiée (14.56)'],
+  ['serveur/tests/', 'essais du serveur : ils décrivent les seuils et délais du statut automatique et du contre-pouvoir, qui sont des paramètres secrets (14.82)'],
   ['CLAUDE.md', 'instructions de travail internes'],
+  ['publication/chrome-web-store/', 'dossier de soumission au Chrome Web Store (brouillons, vérifications internes) : 14.69'],
   ['publication/README-public.md', 'modèle du README public (il devient README.md, ci-dessous)'],
 ];
 

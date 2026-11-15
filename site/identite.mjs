@@ -41,7 +41,7 @@ export function entete(nav = [['/installer', 'Installer']]) {
 }
 
 export function pied() {
-  return `<footer class="pied"><div class="contenu"><p>Tourmentin, version d'essai. Projet sans publicité. Hébergé par OVH. Contact : ${COURRIEL}</p><nav aria-label="Liens de pied de page"><a href="/installer">Installer</a><a href="/gestion">Espace contributeurs</a><a href="/mentions-legales">Mentions légales</a></nav></div></footer>${SCRIPT_COURRIEL}`;
+  return `<footer class="pied"><div class="contenu"><p>Tourmentin. Projet sans publicité. Hébergé par OVH. Contact : ${COURRIEL}</p><nav aria-label="Liens de pied de page"><a href="/installer">Installer</a><a href="/gestion">Espace contributeurs</a><a href="/confidentialite">Confidentialité</a><a href="/mentions-legales">Mentions légales</a></nav></div></footer>${SCRIPT_COURRIEL}`;
 }
 
 // 14.52 : contact public assemblé par script (limite la collecte simple) ; texte lisible sans script : « contact arobase tourmentin point fr ».

@@ -39,9 +39,27 @@ function declaration(hote: string, type?: 'officiel' | 'frauduleuse'): EntreeSig
 const N0: Verdict = { niveau: 'N0', motif: 'aucun champ de saisie ni formulaire' };
 
 describe('determinerStatut — chaque statut de 14.20 F', () => {
-  it('1. Z4 : page locale', () => {
-    const s = determinerStatut(N0, cible('localhost', 'localhost', 'http'), listes(), []);
-    expect(s).toMatchObject({ code: 'hors-perimetre', texte: 'Tourmentin ne s\'applique pas à cette page', couleur: 'gris' });
+  it('1 bis. Z4 : adresse du réseau local (14.67) : texte propre, aucun bouton de déclaration ni de validation', () => {
+    for (const h of ['localhost', '192.168.0.250', '10.0.0.1', '172.16.0.1', '[::1]', 'imprimante.local', 'intranet']) {
+      const s = determinerStatut(N0, cible(h, h, 'http'), listes(), []);
+      expect(s, h).toMatchObject({ code: 'reseau-local', texte: 'Adresse de votre réseau local. Elle n\'est donc pas analysée.', couleur: 'gris', peutSignalerOfficiel: false, peutDeclarerFrauduleuse: false });
+    }
+  });
+
+  it('1 bis. la page de connexion d\'un routeur (192.168.0.250, champ mot de passe) : statut gris, jamais « Site inconnu : prudence »', () => {
+    const connexion: Verdict = { niveau: 'N0', motif: 'schéma non pertinent ou domaine local' };
+    const s = determinerStatut(connexion, cible('192.168.0.250', '192.168.0.250', 'http'), listes(), []);
+    expect(s.code).toBe('reseau-local');
+    expect(s.code).not.toBe('inconnu-prudence');
+  });
+
+  it('1. Z4 : une IP publique n\'est pas hors périmètre (analysée comme tout site inconnu)', () => {
+    const s = determinerStatut(N0, cible('45.12.34.56', '45.12.34.56', 'http'), listes(), []);
+    expect(['reseau-local', 'hors-perimetre']).not.toContain(s.code);
+  });
+
+  it('1. Z4 : les pages internes et les noms en .test restent « ne s\'applique pas à cette page »', () => {
+    expect(determinerStatut(N0, cible('x.test', 'x.test', 'https'), listes(), [])).toMatchObject({ code: 'hors-perimetre', texte: 'Tourmentin ne s\'applique pas à cette page', couleur: 'gris' });
   });
 
   it('1. Z4 : schéma non http(s)', () => {
@@ -158,7 +176,7 @@ describe('determinerStatut — N3 (proposition de 14.20 F) et N3 sans marque', (
 describe('determinerStatut — ordre de priorité', () => {
   it('Z4 avant Z3 (le domaine frauduleux, lui, passe avant les deux : 14.22 C1)', () => {
     const s = determinerStatut(N0, cible('localhost', 'localhost', 'http'), listes({ exclusionsPersonnelles: ['localhost'] }), []);
-    expect(s.code).toBe('hors-perimetre');
+    expect(s.code).toBe('reseau-local');
   });
 
   it('le domaine frauduleux passe avant Z3 et avant Z4 (14.22 C1)', () => {
@@ -289,8 +307,16 @@ describe('statutSansVerdict', () => {
     expect(statutSansVerdict('chrome://extensions/')?.code).toBe('hors-perimetre');
   });
 
-  it('page locale : statut 1', () => {
-    expect(statutSansVerdict('http://localhost:3000/')?.code).toBe('hors-perimetre');
+  it('page du réseau local : statut gris « Adresse de votre réseau local » (14.67), sans attendre aucune analyse', () => {
+    for (const a of ['http://localhost:3000/', 'http://192.168.0.250/', 'http://10.0.0.1:8080/admin', 'http://172.16.5.5/', 'http://172.31.255.255/', 'http://[::1]/', 'http://imprimante.local/', 'http://intranet/']) {
+      expect(statutSansVerdict(a), a).toMatchObject({ code: 'reseau-local', texte: 'Adresse de votre réseau local. Elle n\'est donc pas analysée.', couleur: 'gris', peutSignalerOfficiel: false, peutDeclarerFrauduleuse: false });
+    }
+  });
+
+  it('IP publique, bornes de 172, faux domaine, file:// : pas de statut sans verdict (l\'analyse est attendue)', () => {
+    for (const a of ['http://45.12.34.56/impots', 'http://172.15.0.1/', 'http://172.32.0.1/', 'https://192.168.0.250.exemple.com/', 'file:///C:/Users/x/piege.html']) {
+      expect(statutSansVerdict(a), a).toBeNull();
+    }
   });
 
   it('page http(s) sans verdict : pas de statut, l\'analyse n\'est pas arrivée', () => {

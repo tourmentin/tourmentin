@@ -66,8 +66,8 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Installer Tourmentin (version d'essai)</title>
-<meta name="description" content="Tourmentin repère les imitations de sites officiels français quand vous allez saisir un mot de passe. Version d'essai : installation pas à pas pour Brave, Chrome et Firefox.">
+<title>Installer Tourmentin</title>
+<meta name="description" content="Tourmentin repère les imitations de sites officiels français quand vous allez saisir un mot de passe. Installation pas à pas pour Brave, Chrome et Firefox.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="${BASE}">
 ${FAVICON}
@@ -84,14 +84,16 @@ ${FAVICON}
 <body>
 ${entete()}
 <main>
-<h1>Tourmentin — version d'essai</h1>
+<h1>Tourmentin</h1>
 <p class="version">Version ${version} — mise en ligne le ${date}.</p>
 
 <p>Tourmentin est une extension de navigateur qui repère les pages imitant un service officiel français (impôts, assurance maladie, banques, La Poste…) au moment où vous allez y saisir un mot de passe. Elle analyse les pages sur votre appareil. Quand une page ressemble à une imitation, elle affiche un bandeau d'alerte ; quand le site est un site officiel vérifié, elle le dit dans sa petite fenêtre.</p>
 
 <div class="avert">
-<p><strong>Version d'essai : le silence ne veut rien dire.</strong> Vous testez une version qui n'est pas encore terminée. Si Tourmentin ne dit rien sur une page, cela ne prouve pas que la page est sûre. Personne n'a encore mesuré combien de faux sites Tourmentin laisse passer sans réagir.</p>
-<p><strong>Rien ne doit changer dans vos habitudes.</strong> Vérifiez les adresses comme avant. Ne saisissez jamais un mot de passe si quelque chose vous semble étrange, que Tourmentin ait réagi ou non.</p>
+<p><strong>Un outil d'aide, pas une garantie.</strong> Tourmentin est une aide à la vigilance. Il ne vous protège pas à votre place et ne garantit pas que vous ne serez jamais victime d'un piratage, d'un faux site ou d'une arnaque.</p>
+<p><strong>Le silence ne veut rien dire.</strong> Si Tourmentin ne dit rien sur une page, cela ne prouve pas que la page est sûre. Son efficacité n'a pas encore été mesurée sur un grand nombre de cas réels.</p>
+<p>Un faux site peut lui échapper : un site tout récent que personne n'a encore signalé, une imitation qui ne ressemble pas assez à un service qu'il connaît, un service qu'il ne connaît pas, ou une page conçue pour le tromper. À l'inverse, il peut parfois mettre en garde contre un site légitime.</p>
+<p>Tourmentin est gratuit et fourni sans garantie. Il ne remplace pas votre vigilance, et ses auteurs ne s'engagent pas sur le résultat. Vous restez maître de ce que vous saisissez et des sites auxquels vous faites confiance.</p>
 </div>
 
 <h2>${TITRE_CE_QUE_TOURMENTIN_LIT}</h2>
@@ -106,7 +108,7 @@ ${entete()}
   <li>Cliquez sur « Charger l'extension non empaquetée » et choisissez le dossier extrait.</li>
   <li>Une page de Tourmentin s'ouvre : lisez l'avertissement, puis cliquez sur « J'ai compris ». Pour garder l'icône sous la main, épinglez-la depuis le menu en puzzle de la barre d'outils.</li>
 </ol>
-<p>Le navigateur peut afficher un rappel à chaque démarrage disant que des extensions en mode développeur sont actives : c'est normal pour une version d'essai.</p>
+<p>Le navigateur peut afficher un rappel à chaque démarrage disant que des extensions en mode développeur sont actives : c'est normal pour une installation manuelle.</p>
 <p>Vérifié sur Brave et Chrome.</p>
 <p>Sur Brave, les boucliers peuvent rester activés : Tourmentin fonctionne avec leurs réglages par défaut.</p>
 

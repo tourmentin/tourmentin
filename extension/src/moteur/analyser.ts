@@ -6,9 +6,11 @@ import { appartientAuxDomaines } from './domaine.js';
 import { calculerSeuil, evaluerModificateurs } from './seuils.js';
 import { evaluerAxeImitation, evaluerI1, evaluerI2 } from './signaux-imitation.js';
 import { evaluerAxeExposition } from './signaux-exposition.js';
+import { estAdresseReseauLocal } from './reseau-local.js';
 import type { Config, EntreeAnalyse, ImitationRetenue, Listes, SignalDeclenche, UrlAnalysee, Verdict } from './types.js';
 
-const SCHEMAS_ANALYSABLES = new Set(['https', 'http']);
+// 14.67 : les fichiers ouverts depuis le disque (file://, pièces jointes HTML piégées) restent analysés.
+const SCHEMAS_ANALYSABLES = new Set(['https', 'http', 'file']);
 const HOTES_LOCAUX_SUFFIXES = ['.local', '.localhost', '.test', '.invalid', '.example'];
 const HOTES_LOCAUX_EXACTS = new Set(['localhost']);
 
@@ -17,12 +19,17 @@ function estDomaineLocal(hote: string): boolean {
 }
 
 /**
- * Z4 : page interne (schéma non http/https) ou hôte local. Exportée pour que
+ * Z4 : page interne (schéma ni http, ni https, ni file), hôte local ou adresse du réseau local (14.67). Exportée pour que
  * l'affichage (14.20 F, statut 1) lise la même règle que le moteur au lieu de la
  * recopier : aucune conséquence sur le calcul.
  */
 export function estHorsPerimetre(url: Pick<UrlAnalysee, 'schema' | 'hote'>): boolean {
-  return !SCHEMAS_ANALYSABLES.has(url.schema) || estDomaineLocal(url.hote);
+  return !SCHEMAS_ANALYSABLES.has(url.schema) || estDomaineLocal(url.hote) || estReseauLocal(url);
+}
+
+/** 14.67 : page web (http ou https) d'une adresse du réseau local : routeur, imprimante, intranet. Donne le statut « Adresse de votre réseau local ». */
+export function estReseauLocal(url: Pick<UrlAnalysee, 'schema' | 'hote'>): boolean {
+  return (url.schema === 'http' || url.schema === 'https') && estAdresseReseauLocal(url.hote);
 }
 
 /**
