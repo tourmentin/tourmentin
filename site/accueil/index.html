@@ -33,6 +33,7 @@ a{color:inherit}
 .marque svg{width:32px;height:32px}
 .nav{display:flex;gap:1.25rem;font-size:.95rem}
 .nav a{text-decoration:none;color:var(--brume)}
+.nav a.nav-compte{border:1px solid currentColor;border-radius:999px;padding:.15rem .8rem;color:#F4F8F9}
 .nav a:hover{color:var(--mer);text-decoration:underline}
 
 /* Ouverture : mer numérique */
@@ -180,6 +181,8 @@ footer nav{display:flex;flex-wrap:wrap;gap:1.25rem}
         <a href="#fonctionnement">Fonctionnement</a>
         <a href="#confidentialite">Vos données</a>
         <a href="/installer">Installer</a>
+        <a href="/gestion/connexion">Se connecter</a>
+        <a class="nav-compte" href="/gestion/inscription">Créer un compte</a>
       </nav>
     </div>
     <div class="hero-texte">
@@ -277,6 +280,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:1.25rem}
     <div class="contenu">
       <h2>Une liste de sites qui s'enrichit avec vous</h2>
       <p class="compteur-accueil" id="compteur-accueil" hidden><strong id="nb-sites">…</strong> sites déjà vérifiés ou répertoriés grâce à la communauté. <a href="/chiffres/">Voir les chiffres</a> · <a href="/proteger-mes-proches/">Protéger mes proches</a> · <a href="/verifier-un-lien/">Vérifier un lien reçu</a></p>
+      <p><strong>Un seul clic suffit.</strong> Vous signalez un site comme fiable, une personne de confiance le vérifie, et une fois validé, vous êtes protégé à vie contre les tentatives d'hameçonnage qui imitent ce site, comme tous les utilisateurs de Tourmentin.</p>
       <div class="faits">
         <div class="fait">
           <h3>Les sites vérifiés</h3>

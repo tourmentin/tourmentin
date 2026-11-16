@@ -24,7 +24,7 @@ form.verif{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}form.verif input{
 form.verif button,.bouton{background:var(--voile);color:var(--mer);font:inherit;font-weight:700;border:0;border-radius:6px;padding:.7rem 1.2rem;cursor:pointer;text-decoration:none;display:inline-block}
 #reponse{margin-top:1rem}#reponse .ok{border-left:6px solid var(--balise)}#reponse .non{border-left:6px solid #C0392B}#reponse .inconnu{border-left:6px solid var(--sable)}
 </style></head><body>
-${entete([['/installer', 'Installer'], ['/chiffres/', 'Les chiffres']])}
+${entete([['/installer', 'Installer'], ['/chiffres/', 'Les chiffres'], ['/gestion/connexion', 'Se connecter'], ['/gestion/inscription', 'Créer un compte']])}
 <main>
 ${corps}
 </main>
@@ -59,6 +59,7 @@ const chiffres = `<h1>Les chiffres de Tourmentin</h1>
 
 const proches = `<h1>Déclarer mes sites préférés pour protéger mes proches</h1>
 <p>Tourmentin reconnaît les imitations de sites que la liste connaît. Plus la liste contient de sites que vous et vos proches utilisez vraiment (votre banque régionale, votre mutuelle, votre commune, votre fournisseur d'énergie…), mieux elle les protège, et mieux elle repère ceux qui les copient.</p>
+<div class="carte"><strong>Un seul clic suffit.</strong> Vous signalez le site comme fiable, une personne de confiance le vérifie, et une fois validé, vous êtes protégé à vie contre les tentatives d'hameçonnage qui imitent ce site, comme tous les utilisateurs de Tourmentin.</div>
 <h2>Comment faire, en trois gestes</h2>
 <div class="carte"><ol>
 <li><strong>Installez Tourmentin</strong> sur votre navigateur (<a href="/installer">page d'installation</a>).</li>

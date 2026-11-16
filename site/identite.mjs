@@ -35,7 +35,7 @@ footer.pied nav{display:flex;flex-wrap:wrap;gap:1.25rem}
 footer.pied a{color:var(--brume)}
 `;
 
-export function entete(nav = [['/installer', 'Installer']]) {
+export function entete(nav = [['/installer', 'Installer'], ['/gestion/connexion', 'Se connecter'], ['/gestion/inscription', 'Créer un compte']]) {
   const liens = nav.map(([h, t]) => `<a href="${h}">${t}</a>`).join('');
   return `<header class="bandeau-page"><div class="contenu entete"><a class="marque" href="/" aria-label="Tourmentin, accueil">${LOGO_SVG}Tourmentin</a><nav class="nav" aria-label="Navigation principale">${liens}</nav></div></header>`;
 }

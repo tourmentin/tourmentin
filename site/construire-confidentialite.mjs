@@ -54,6 +54,10 @@ const corps = `<h1>Confidentialité</h1>
 <p>Le serveur limite le nombre de requêtes par adresse IP. Pour cela, il n'enregistre pas l'adresse IP : il la transforme en empreinte secrète qui sert de compteur, effacée à la fin de sa période de comptage (une heure au plus).</p>
 <p>Les déclarations reçues sont lues par les contributeurs qui décident si un site est officiel ou frauduleux. Elles ne sont ni vendues, ni transmises à des tiers, ni utilisées pour de la publicité. Elles sont conservées sans limite de durée, puisqu'elles alimentent une base collaborative de sites vérifiés ou frauduleux.</p>
 
+<h2>Si vous créez un compte sur tourmentin.fr</h2>
+<p>Le compte est facultatif : l'extension fonctionne sans. Pour en créer un, vous indiquez un identifiant, une <strong>adresse e-mail</strong> et un mot de passe. L'adresse sert uniquement à confirmer le compte (lien valable 24 heures) et à retrouver votre mot de passe ; elle n'est jamais montrée aux autres utilisateurs, ni utilisée pour de la publicité ou transmise à des tiers. Le mot de passe n'est conservé que sous forme d'empreinte (Argon2id) : personne, pas même l'administrateur du serveur, ne peut le lire. Une inscription jamais confirmée est effacée au bout de 48 heures.</p>
+<p>Si vous reliez votre extension à votre compte avec un code, vos déclarations sont rattachées à votre compte : vous les voyez dans « Mes déclarations », et les administrateurs du site peuvent voir, pour chaque compte, le nombre de déclarations et lesquelles ont été validées ou rejetées. Cela sert à repérer les personnes fiables à qui proposer de devenir utilisateur de confiance. Pour supprimer votre compte et votre adresse e-mail, écrivez à contact@tourmentin.fr.</p>
+
 <h2>Ce qui n'est jamais collecté</h2>
 <p>Le contenu de ce que vous tapez dans une page, y compris mots de passe, identifiants, numéros de carte : Tourmentin lit le type et l'intitulé des champs, jamais les caractères que vous y tapez. Il compte seulement combien de caractères ont été tapés dans un champ d'identifiant ou de mot de passe (un nombre, par exemple « 12 caractères saisis », qui peut figurer parmi les signaux d'une déclaration que vous confirmez). Les adresses complètes avec leur partie après « ? » ou « # ». Votre historique de navigation : Tourmentin n'envoie rien des pages que vous ne déclarez pas. Les cookies : aucune requête de l'extension n'en emporte. Aucune statistique d'usage, aucun traceur, aucune publicité, aucun code téléchargé : seules des données (listes de sites) sont téléchargées.</p>
 
@@ -65,7 +69,7 @@ const corps = `<h1>Confidentialité</h1>
 
 <h2>Évolutions</h2>
 <p>Cette page sera mise à jour avant tout changement de ce qui est lu, conservé ou envoyé, et la date de la dernière mise à jour figurera ci-dessous. Le code de l'extension est public : chacun peut vérifier ce que cette page affirme.</p>
-<p>Dernière mise à jour : 15 novembre 2026.</p>`;
+<p>Dernière mise à jour : 16 novembre 2026.</p>`;
 
 mkdirSync(join(ICI, 'publie', 'confidentialite'), { recursive: true });
 writeFileSync(join(ICI, 'publie', 'confidentialite', 'index.html'), page('Confidentialité', corps));
