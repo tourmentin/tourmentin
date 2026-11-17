@@ -1,0 +1,39 @@
+{
+  "id": "monetico",
+  "libelle": "Monetico (Crédit Mutuel)",
+  "criticite": 2,
+  "actif": false,
+  "domaines": [
+    "monetico.com"
+  ],
+  "domaine_principal": "monetico.com",
+  "domaines_verifies": [
+    "monetico.com"
+  ],
+  "termes_forts": [
+    "tableau de bord monetico online",
+    "portail monetico commerçant"
+  ],
+  "termes_faibles": [
+    "monetico"
+  ],
+  "termes_saisie": [
+    "identifiant",
+    "mot de passe"
+  ],
+  "format_identifiant": "",
+  "racines_typo": [
+    "monetico"
+  ],
+  "couleurs": [],
+  "franceconnect": false,
+  "espaces_multiples": [],
+  "a_verifier": true,
+  "notes_verification": "Domaine confirmé par la recherche (monetico.com ; monetico-paiement.com ne résout pas). Libellés lus dans les extraits de recherche, page de connexion non lue.",
+  "mode_verification_connexion": "verification-manuelle",
+  "date_verification_connexion": "2026-11-17",
+  "url_connexion": "https://www.monetico.com/fr/identification/authentification.html",
+  "url_connexion_finale": "https://www.monetico.com/fr/identification/authentification.html",
+  "etape_connexion": "a-relever",
+  "url_connexion_hors_domaines": false
+}

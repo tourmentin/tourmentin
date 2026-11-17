@@ -1,0 +1,47 @@
+{
+  "id": "credit-mutuel",
+  "libelle": "Crédit Mutuel",
+  "criticite": 3,
+  "actif": false,
+  "domaines": [
+    "creditmutuel.fr",
+    "creditmutuel.com",
+    "cert.creditmutuel.fr"
+  ],
+  "domaine_principal": "creditmutuel.fr",
+  "domaines_verifies": [
+    "creditmutuel.fr",
+    "cert.creditmutuel.fr",
+    "creditmutuel.com"
+  ],
+  "termes_forts": [
+    "safetrans",
+    "connexion à votre espace client - crédit mutuel"
+  ],
+  "termes_faibles": [
+    "crédit mutuel",
+    "espace client",
+    "codes d'accès oubliés",
+    "certificat électronique"
+  ],
+  "termes_saisie": [
+    "identifiant",
+    "mot de passe"
+  ],
+  "format_identifiant": "",
+  "racines_typo": [
+    "creditmutuel",
+    "credit-mutuel"
+  ],
+  "couleurs": [],
+  "franceconnect": false,
+  "espaces_multiples": [],
+  "a_verifier": false,
+  "notes_verification": "Domaine et libellés lus sur la page de connexion réelle le 17/11/2026 (lecture automatisée) ; couleurs non relevées. Les marques du groupe (CIC, banques régionales) ne sont pas couvertes.",
+  "mode_verification_connexion": "lecture-automatisee",
+  "date_verification_connexion": "2026-11-17",
+  "url_connexion": "https://www.creditmutuel.fr/fr/authentification.html",
+  "url_connexion_finale": "https://www.creditmutuel.fr/fr/authentification.html",
+  "etape_connexion": "formulaire",
+  "url_connexion_hors_domaines": false
+}

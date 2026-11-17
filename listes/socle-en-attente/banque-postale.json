@@ -1,0 +1,47 @@
+{
+  "id": "banque-postale",
+  "libelle": "La Banque Postale",
+  "criticite": 3,
+  "actif": false,
+  "domaines": [
+    "labanquepostale.fr",
+    "voscomptesenligne.labanquepostale.fr"
+  ],
+  "domaine_principal": "labanquepostale.fr",
+  "domaines_verifies": [
+    "labanquepostale.fr",
+    "voscomptesenligne.labanquepostale.fr"
+  ],
+  "termes_forts": [
+    "identifiant (10 chiffres)",
+    "mot de passe (6 chiffres)"
+  ],
+  "termes_faibles": [
+    "la banque postale",
+    "banque postale",
+    "livret a",
+    "compte courant",
+    "vos comptes en ligne"
+  ],
+  "termes_saisie": [
+    "identifiant",
+    "mot de passe"
+  ],
+  "format_identifiant": "10 chiffres, mot de passe à 6 chiffres",
+  "racines_typo": [
+    "labanquepostale",
+    "banquepostale",
+    "banque-postale"
+  ],
+  "couleurs": [],
+  "franceconnect": false,
+  "espaces_multiples": [],
+  "a_verifier": false,
+  "notes_verification": "Domaine et libellés lus sur la page de connexion réelle le 17/11/2026 (lecture automatisée) ; couleurs non relevées.",
+  "mode_verification_connexion": "lecture-automatisee",
+  "date_verification_connexion": "2026-11-17",
+  "url_connexion": "https://voscomptesenligne.labanquepostale.fr/voscomptes/canalXHTML/identif.ea?origin=particuliers",
+  "url_connexion_finale": "https://voscomptesenligne.labanquepostale.fr/auth/digital-authentification/connexion",
+  "etape_connexion": "identifiant-et-clavier-virtuel",
+  "url_connexion_hors_domaines": false
+}

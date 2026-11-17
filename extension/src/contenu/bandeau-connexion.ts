@@ -37,6 +37,7 @@ export function construireContenuBandeauConnexion(racine: ShadowRoot, hoteReel: 
       font: 13px/1.45 system-ui, sans-serif; color: #1a1a1a;
       padding: 8px 16px; display: flex; flex-direction: column; gap: 6px;
     }
+    .bandeau.efface { opacity: 0; transition: opacity 1s linear; }
     .ligne { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .texte { flex: 1 1 300px; }
     .adresse { font-family: monospace; font-weight: 600; }
@@ -70,6 +71,14 @@ export function construireContenuBandeauConnexion(racine: ShadowRoot, hoteReel: 
   zone.className = 'apercu';
   zone.hidden = true;
 
+  // Une fois la réponse donnée : 1 s de lecture, puis fondu de 1 s, puis le bandeau est retiré. Un échec d'envoi reste affiché.
+  const disparaitre = (): void => {
+    setTimeout(() => {
+      bandeau.classList.add('efface');
+      setTimeout(actions.fermer, 1000);
+    }, 1000);
+  };
+
   const bonSite = document.createElement('button');
   bonSite.className = 'action';
   bonSite.textContent = 'C\'est le bon site';
@@ -88,6 +97,7 @@ export function construireContenuBandeauConnexion(racine: ShadowRoot, hoteReel: 
       zone.textContent = 'Envoi en cours…';
       const resultat = await actions.confirmer(true).catch((): ResultatConfirmation => ({ envoi: 'non' }));
       zone.textContent = resultat.envoi === 'ok' ? 'Merci ! Votre déclaration a été envoyée à tourmentin.fr.' : messageResultat(resultat);
+      if (resultat.envoi !== 'echec') disparaitre();
       return;
     }
     zone.append(
@@ -95,6 +105,7 @@ export function construireContenuBandeauConnexion(racine: ShadowRoot, hoteReel: 
         zone.replaceChildren();
         zone.textContent = messageResultat(resultat);
         bonSite.hidden = true;
+        if (resultat.envoi !== 'echec') disparaitre();
       }),
     );
   });

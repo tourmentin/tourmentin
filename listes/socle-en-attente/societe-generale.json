@@ -1,0 +1,45 @@
+{
+  "id": "societe-generale",
+  "libelle": "SG (Société Générale)",
+  "criticite": 3,
+  "actif": false,
+  "domaines": [
+    "sg.fr",
+    "particuliers.sg.fr"
+  ],
+  "domaine_principal": "sg.fr",
+  "domaines_verifies": [
+    "particuliers.sg.fr"
+  ],
+  "termes_forts": [
+    "appli sg",
+    "code secret oublié"
+  ],
+  "termes_faibles": [
+    "société générale",
+    "sg",
+    "jauge",
+    "compte favori"
+  ],
+  "termes_saisie": [
+    "code client",
+    "code secret"
+  ],
+  "format_identifiant": "",
+  "racines_typo": [
+    "societegenerale",
+    "societe-generale",
+    "sg-fr"
+  ],
+  "couleurs": [],
+  "franceconnect": false,
+  "espaces_multiples": [],
+  "a_verifier": true,
+  "notes_verification": "Domaine lu sur la page d'accueil réelle le 17/11/2026 ; page de connexion non lue (connexion intégrée ou construite en JavaScript, ou domaines régionaux non recensés) : laissée inactive jusqu'à vérification à la main (listes/verifier-socle.md). La marque est devenue « SG » (fusion avec le Crédit du Nord) : domaines du Crédit du Nord à recenser.",
+  "mode_verification_connexion": "verification-manuelle",
+  "date_verification_connexion": "2026-11-17",
+  "url_connexion": "https://particuliers.sg.fr/",
+  "url_connexion_finale": "https://particuliers.sg.fr/",
+  "etape_connexion": "ecran-de-choix",
+  "url_connexion_hors_domaines": false
+}

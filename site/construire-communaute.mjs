@@ -59,7 +59,7 @@ const chiffres = `<h1>Les chiffres de Tourmentin</h1>
 
 const proches = `<h1>Déclarer mes sites préférés pour protéger mes proches</h1>
 <p>Tourmentin reconnaît les imitations de sites que la liste connaît. Plus la liste contient de sites que vous et vos proches utilisez vraiment (votre banque régionale, votre mutuelle, votre commune, votre fournisseur d'énergie…), mieux elle les protège, et mieux elle repère ceux qui les copient.</p>
-<div class="carte"><strong>Un seul clic suffit.</strong> Vous signalez le site comme fiable, une personne de confiance le vérifie, et une fois validé, vous êtes protégé à vie contre les tentatives d'hameçonnage qui imitent ce site, comme tous les utilisateurs de Tourmentin.</div>
+<div class="carte"><strong>Un seul clic suffit.</strong> Vous signalez le site comme fiable, un administrateur le vérifie, et une fois validé, vous êtes protégé à vie contre les tentatives d'hameçonnage qui imitent ce site, comme tous les utilisateurs de Tourmentin.</div>
 <h2>Comment faire, en trois gestes</h2>
 <div class="carte"><ol>
 <li><strong>Installez Tourmentin</strong> sur votre navigateur (<a href="/installer">page d'installation</a>).</li>

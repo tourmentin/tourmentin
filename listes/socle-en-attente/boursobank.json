@@ -1,0 +1,47 @@
+{
+  "id": "boursobank",
+  "libelle": "BoursoBank (Boursorama)",
+  "criticite": 3,
+  "actif": false,
+  "domaines": [
+    "boursobank.com",
+    "clients.boursobank.com",
+    "boursorama.com"
+  ],
+  "domaine_principal": "boursobank.com",
+  "domaines_verifies": [
+    "clients.boursobank.com",
+    "boursorama.com"
+  ],
+  "termes_forts": [
+    "espace client et connexion compte boursobank",
+    "veuillez toujours vérifier que vous êtes sur la bonne adresse"
+  ],
+  "termes_faibles": [
+    "boursobank",
+    "boursorama",
+    "mon identifiant",
+    "mon mot de passe",
+    "clavier virtuel"
+  ],
+  "termes_saisie": [
+    "mon identifiant",
+    "mon mot de passe"
+  ],
+  "format_identifiant": "",
+  "racines_typo": [
+    "boursobank",
+    "boursorama"
+  ],
+  "couleurs": [],
+  "franceconnect": false,
+  "espaces_multiples": [],
+  "a_verifier": false,
+  "notes_verification": "Domaine et libellés lus sur la page de connexion réelle le 17/11/2026 (lecture automatisée) ; couleurs non relevées. Le contrôle « boursobank.com » du domaine principal vient du domaine de connexion lu ; boursorama.com est l'ancien nom, relevé sur la page d'accueil.",
+  "mode_verification_connexion": "lecture-automatisee",
+  "date_verification_connexion": "2026-11-17",
+  "url_connexion": "https://clients.boursobank.com/connexion/",
+  "url_connexion_finale": "https://clients.boursobank.com/connexion/",
+  "etape_connexion": "identifiant-puis-mot-de-passe",
+  "url_connexion_hors_domaines": false
+}

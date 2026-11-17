@@ -1,0 +1,41 @@
+{
+  "id": "caisse-epargne",
+  "libelle": "Caisse d'Épargne",
+  "criticite": 3,
+  "actif": false,
+  "domaines": [
+    "caisse-epargne.fr"
+  ],
+  "domaine_principal": "caisse-epargne.fr",
+  "domaines_verifies": [
+    "caisse-epargne.fr"
+  ],
+  "termes_forts": [
+    "bienvenue chez caisse d'epargne"
+  ],
+  "termes_faibles": [
+    "caisse d'épargne",
+    "banque à distance",
+    "sociétaire"
+  ],
+  "termes_saisie": [
+    "identifiant",
+    "code personnel"
+  ],
+  "format_identifiant": "",
+  "racines_typo": [
+    "caisse-epargne",
+    "caisseepargne"
+  ],
+  "couleurs": [],
+  "franceconnect": false,
+  "espaces_multiples": [],
+  "a_verifier": true,
+  "notes_verification": "Domaine lu sur la page d'accueil réelle le 17/11/2026 ; page de connexion non lue (connexion intégrée ou construite en JavaScript, ou domaines régionaux non recensés) : laissée inactive jusqu'à vérification à la main (listes/verifier-socle.md). La banque à distance s'ouvre sur le domaine de chaque caisse : à recenser.",
+  "mode_verification_connexion": "verification-manuelle",
+  "date_verification_connexion": "2026-11-17",
+  "url_connexion": "https://www.caisse-epargne.fr/",
+  "url_connexion_finale": "https://www.caisse-epargne.fr/",
+  "etape_connexion": "a-relever",
+  "url_connexion_hors_domaines": false
+}

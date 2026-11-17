@@ -1,0 +1,46 @@
+{
+  "id": "lcl",
+  "libelle": "LCL",
+  "criticite": 3,
+  "actif": false,
+  "domaines": [
+    "lcl.fr",
+    "monespace.lcl.fr"
+  ],
+  "domaine_principal": "lcl.fr",
+  "domaines_verifies": [
+    "lcl.fr",
+    "monespace.lcl.fr"
+  ],
+  "termes_forts": [
+    "lcl mes comptes",
+    "lcl banque et assurance"
+  ],
+  "termes_faibles": [
+    "LCL",
+    "mon espace",
+    "votre identifiant",
+    "code personnel",
+    "compte de dépôt",
+    "livret"
+  ],
+  "termes_saisie": [
+    "votre identifiant",
+    "code personnel"
+  ],
+  "format_identifiant": "",
+  "racines_typo": [
+    "lcl"
+  ],
+  "couleurs": [],
+  "franceconnect": false,
+  "espaces_multiples": [],
+  "a_verifier": false,
+  "notes_verification": "Domaine et libellés lus sur la page de connexion réelle le 17/11/2026 (lecture automatisée) ; couleurs non relevées.",
+  "mode_verification_connexion": "lecture-automatisee",
+  "date_verification_connexion": "2026-11-17",
+  "url_connexion": "https://monespace.lcl.fr/connexion",
+  "url_connexion_finale": "https://monespace.lcl.fr/connexion",
+  "etape_connexion": "identifiant-puis-code",
+  "url_connexion_hors_domaines": false
+}

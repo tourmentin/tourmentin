@@ -1,0 +1,43 @@
+{
+  "id": "credit-agricole",
+  "libelle": "Crédit Agricole",
+  "criticite": 3,
+  "actif": false,
+  "domaines": [
+    "credit-agricole.fr",
+    "credit-agricole.com"
+  ],
+  "domaine_principal": "credit-agricole.fr",
+  "domaines_verifies": [
+    "credit-agricole.fr"
+  ],
+  "termes_forts": [
+    "crédit agricole"
+  ],
+  "termes_faibles": [
+    "ma banque",
+    "espace client",
+    "caisse régionale"
+  ],
+  "termes_saisie": [
+    "identifiant",
+    "code personnel"
+  ],
+  "format_identifiant": "",
+  "racines_typo": [
+    "credit-agricole",
+    "creditagricole",
+    "ca-"
+  ],
+  "couleurs": [],
+  "franceconnect": false,
+  "espaces_multiples": [],
+  "a_verifier": true,
+  "notes_verification": "Domaine lu sur la page d'accueil réelle le 17/11/2026 ; page de connexion non lue (connexion intégrée ou construite en JavaScript, ou domaines régionaux non recensés) : laissée inactive jusqu'à vérification à la main (listes/verifier-socle.md). Chaque caisse régionale a son propre domaine de connexion (comme la MSA) ; la page d'accueil nationale a expiré lors de la lecture.",
+  "mode_verification_connexion": "verification-manuelle",
+  "date_verification_connexion": "2026-11-17",
+  "url_connexion": "https://www.credit-agricole.fr/",
+  "url_connexion_finale": "https://www.credit-agricole.fr/",
+  "etape_connexion": "a-relever",
+  "url_connexion_hors_domaines": false
+}
